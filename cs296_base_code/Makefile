@@ -15,7 +15,7 @@ DOXYGEN = doxygen
 TARGET = cs296_base
 
 # Project Paths
-PROJECT_ROOT=$(HOME)/Desktop/RubeGoldberg/cs296_base_code
+PROJECT_ROOT=/home/rj/Desktop/cs296/g28_lab07/cs296_base_code
 EXTERNAL_ROOT=$(PROJECT_ROOT)/external
 SRCDIR = $(PROJECT_ROOT)/src
 OBJDIR = $(PROJECT_ROOT)/obj
@@ -31,9 +31,9 @@ GL_ROOT=/usr
 LIBS = -lBox2D -lglui -lglut -lGLU -lGL
 
 # Compiler and Linker flags
-CPPFLAGS =-g -O3 -Wall 
+CPPFLAGS =-g -Wall -pg
 CPPFLAGS+=-I $(BOX2D_ROOT)/include -I $(GLUI_ROOT)/include
-LDFLAGS+=-L $(BOX2D_ROOT)/lib -L $(GLUI_ROOT)/lib
+LDFLAGS+=-L $(BOX2D_ROOT)/lib -L $(GLUI_ROOT)/lib -pg
 
 ######################################
 
@@ -68,7 +68,7 @@ setup:
 
 $(BINDIR)/$(TARGET): $(OBJS)
 	@$(PRINTF) "$(MESG_COLOR)Building executable:$(NO_COLOR) $(FILE_COLOR) %16s$(NO_COLOR)" "$(notdir $@)"
-	@$(CC) -o $@ $(LDFLAGS) $(OBJS) $(LIBS) 2> temp.log || touch temp.err
+	@$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $(OBJS) $(LIBS) 2> temp.log || touch temp.err
 	@if test -e temp.err; \
 	then $(PRINTF) $(ERR_FMT) $(ERR_STRING) && $(CAT) temp.log; \
 	elif test -s temp.log; \
@@ -81,7 +81,7 @@ $(BINDIR)/$(TARGET): $(OBJS)
 
 $(OBJS): $(OBJDIR)/%.o : $(SRCDIR)/%.cpp
 	@$(PRINTF) "$(MESG_COLOR)Compiling: $(NO_COLOR) $(FILE_COLOR) %25s$(NO_COLOR)" "$(notdir $<)"
-	@$(CC) $(CPPFLAGS) -c $< -o $@ -MD 2> temp.log || touch temp.err
+	@$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@ -MD 2> temp.log || touch temp.err
 	@if test -e temp.err; \
 	then $(PRINTF) $(ERR_FMT) $(ERR_STRING) && $(CAT) temp.log; \
 	elif test -s temp.log; \
@@ -96,9 +96,46 @@ doc:
 	@$(DOXYGEN) $(DOCDIR)/Doxyfile 2 > /dev/null
 	@$(ECHO) "Done"
 
+
+debug_prof:
+	@mkdir -p debugProfile
+	@rm -rf $(EXTERNAL_ROOT)/src/Box2D
+	@rm -rf $(EXTERNAL_ROOT)/src/include/*
+	@rm -rf $(EXTERNAL_ROOT)/src/lib/*
+	@tar -xzf $(EXTERNAL_ROOT)/src/Box2D.tgz -C $(EXTERNAL_ROOT)/src
+	@mkdir $(EXTERNAL_ROOT)/src/Box2D/build296
+	@cd $(EXTERNAL_ROOT)/src/Box2D/build296;cmake -DCMAKE_BUILD_TYPE=Debug ../
+	@make -C $(EXTERNAL_ROOT)/src/Box2D/build296
+	@make -C $(EXTERNAL_ROOT)/src/Box2D/build296 install
+	@make clean
+	@make 
+	@./bin/cs296_base 10000
+	@gprof bin/cs296_base gmon.out > debugProfile/g28_debug_prof.dat
+	@gprof bin/cs296_base | python gprof2dot.py | dot -Tpng -o debugProfile/output.png
+
+release_prof: 
+	@mkdir -p releaseProfile
+	@rm -rf $(EXTERNAL_ROOT)/src/Box2D
+	@rm -rf $(EXTERNAL_ROOT)/src/include/*
+	@rm -rf $(EXTERNAL_ROOT)/src/lib/*
+	@tar -xvf $(EXTERNAL_ROOT)/src/Box2D.tgz -C $(EXTERNAL_ROOT)/src
+	@mkdir $(EXTERNAL_ROOT)/src/Box2D/build296
+	@cd $(EXTERNAL_ROOT)/src/Box2D/build296;cmake -DCMAKE_BUILD_TYPE=Debug ../
+	@make -C $(EXTERNAL_ROOT)/src/Box2D/build296
+	@make -C $(EXTERNAL_ROOT)/src/Box2D/build296 install
+	@make clean
+	@make "CFLAGS= -O2 -O3"
+	@./bin/cs296_base 10000
+	@gprof bin/cs296_base gmon.out > releaseProfile/g28_release_prof.dat
+	@gprof bin/cs296_base | python gprof2dot.py | dot -Tpng -o releaseProfile/output.png
+
+report:
+	@make -C $(DOCDIR)
+
+
 clean:
 	@$(ECHO) -n "Cleaning up..."
-	@$(RM) -rf $(OBJDIR) *~ $(DEPS) $(SRCDIR)/*~
+	@$(RM) -rf $(OBJDIR) *~ $(DEPS) $(SRCDIR)/*~ $(BINDIR)
 	@$(ECHO) "Done"
 
 distclean: clean

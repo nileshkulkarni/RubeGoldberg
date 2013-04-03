@@ -32,7 +32,7 @@ base_sim_t::base_sim_t()
 
 	m_point_count = 0;
 
-	m_world->SetDebugDraw(&m_debug_draw);
+  m_world->SetDebugDraw(&m_debug_draw);
 	
 	m_step_count = 0;
 
@@ -107,8 +107,8 @@ void base_sim_t::step(settings_t* settings)
   uint32 flags = 0;
   flags += settings->draw_shapes			* b2Draw::e_shapeBit;
   flags += settings->draw_joints			* b2Draw::e_jointBit;
-  flags += settings->draw_AABBs			* b2Draw::e_aabbBit;
-  flags += settings->draw_pairs			* b2Draw::e_pairBit;
+  flags += settings->draw_AABBs			  * b2Draw::e_aabbBit;
+  flags += settings->draw_pairs			  * b2Draw::e_pairBit;
   flags += settings->draw_COMs				* b2Draw::e_centerOfMassBit;
   m_debug_draw.SetFlags(flags);
   

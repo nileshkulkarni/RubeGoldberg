@@ -36,216 +36,206 @@ namespace cs296
 {
 
   //! What is the difference between a class and a struct in C++?
-  /*
-  Members of a class are private by default, whereas members of a struct are public by default. 
-  Inheritance between classes is also private by default, and inheritance between structs is public by default
+  /*!
+  * - The structures are value types and the classes are reference types
+  * - Classes are usually used for large amounts of data, whereas structs are usually used for smaller amount of data
+  * - Classes could be inherited whereas structures no
+  * - A structure couldn't be Null like a class
+  * - A structure couldn't have a destructor such as class
+  * - A structure can't be abstract, a class can
+  * - You cannot override any methods within a structure except those belong to type of object
+  * - Declared events within a class are automatically locked and then they are Thread safe, at the contrast of the structure type where event couldn't be locked.
+  * - A structure must have always the default parameter less constructor be defined as public but a class might have one, so you can't define a private parameter less constructor
+  * - A static constructor is trigged in case of class but not in case of structure 
+  * - The strucutre can't conatain a volatile field wheatheas the class does
+  * - You can't use sizeof with classes but you can with structures
+  * - Fields are automatically initialized with classes to 0/false/null wheatheras in strucutres no
+  * - Fields couldn't directley instanciated within structures but classes allow such operations
+  * - Structure and class don't adopt the same aproach taward the System.Object.Equals() method
   */
   class base_sim_t;
   struct settings_t;
   
   //! Why do we use a typedef
-  /*
-  typedef is used when we want to replace one set of string by another which is usually smaller and convenient
+  /*! - A typedef declaration introduces a name that, within its scope, becomes a synonym for the type given by the type-declaration portion of the declaration
+  * - typedef is helpful for giving a short, sharp alias to complicated function pointer types
+  * - typedef is necessary for many template metaprogramming tasks -- whenever a class is treated as a "compile-time type function", a typedef is used as a "compile-time type value" to obtain the resulting typ
   */
   typedef base_sim_t* sim_create_fcn(); 
 
-  //! Simulation settings. Some can be controlled in the GUI.
-  struct settings_t 
-    {
-    //! Notice the initialization of the class members in the constructor
-    //! How is this happening?
-    /*
-    Constructor is called at the time of object creation and so values are initialized by default
-    */
+  /*! Simulation settings. Some can be controlled in the GUI.
+  - \c settings_t() : The constructor will set the required values of settings members. 
+  - \c The members in the struct settings_t can be changed to configure the simulation in the world.
+  - \c view_center : sets the position of the centre of the view.
+  - \c hz : It is the inverse of the time of an iteration.
+  - \c velocity_iterations : the value in steps in which velocity changes.
+  - \c position_iterations : the value in steps in which velocity changes. 
+  - \c draw_shapes : if set 1,draws the shapes of bodies otherwise no.
+  - \c draw_joints : if set 1,shows the wires which connect bodies in pulleyjoint etc. otherwise i.e if set 0 not drawn.
+  - \c draw_AABBs : if set 1,the [axis aligned bounding boxes] of minimum size in which the body fits is shown otherwise i.e if set 0 not drawn.
+  - \c draw_pairs : for enablling and disabling drawing of pairs
+  - Similarly \c draw_contact_points, \c draw_contact_normals, \c draw_contact_forces, \c draw_friction_forces, 
+    \c draw_COMs, \c draw_stats, \c draw_profile, \c enable_warm_starting, 
+    \c enable_continuous, \c enable_sub_stepping, \c pause, \c single_step 
+    all are set 0 or 1 as per requirements no description is given as their names are self-explanatory.
+*/
+  struct settings_t
+  {
+    //! Notice the initialization of the class members in the constructor\n
+    //! How is this happening?\n
+    //! A class constructor is a special member function of a class that is executed whenever we create new objects of that class.
+    //! A constructor will have exact same name as the class and it does not have any return type at all, not even void. Constructors can be very useful for setting initial values for certain member variables 
+    //! Data members of a class can be initialised using the constructor of class.
+    
     settings_t() :
-      view_center(0.0f, 20.0f), //set the center of gui as (0.0f, 20.0f)
-      hz(60.0f), 
-      velocity_iterations(8),//Default no of velocity iterations is set to 8 :One solver iteration is a single pass over all the constraints
-      position_iterations(3),//Default no of position iterations set to 3
-      draw_shapes(1),//Set draw_shapes property to 1 which enables drawing of shapes
-      draw_joints(1),//Set draw_joints property to 1 which enables drawing of joints
-      draw_AABBs(0),//Set draw_AABBs property to 0 which disables drawing AABBs :AABBs is axis-aligned bounding boxes
-      draw_pairs(0),//Set draw_pairs to 0 disabling 
-      draw_contact_points(0),//Set draw_contact_points to 0 to disable contact points from showing
-      draw_contact_normals(0),//Set draw_contact_normals to 0 to disable contact normals from showing
-      draw_contact_forces(0),//Set draw_contact_forces to 0 to disable contact forces from showing
-      draw_friction_forces(0),//Set draw_friction_forces to 0 to disable friction forces from showing
-      draw_COMs(0),//Disable showing of COM
-      draw_stats(0),//Disable statistics(no of bodies,contacts,joints,etc) from showing
-      draw_profile(0),//Disable profile(step,collide ,solve ,init value) from showing
-      enable_warm_starting(1),//Enable warm starting property 
-      enable_continuous(1),//enable continuous property for continuous collision detection
-      enable_sub_stepping(0),//disables sub stepping
-      pause(0),//Disables pause
-      //!Disable single step 
+      view_center(0.0f, 20.0f),
+      hz(60.0f),
+      velocity_iterations(8),
+      position_iterations(3),
+      draw_shapes(1),
+      draw_joints(1),
+      draw_AABBs(0),
+      draw_pairs(0),
+      draw_contact_points(0),
+      draw_contact_normals(0),
+      draw_contact_forces(0),
+      draw_friction_forces(0),
+      draw_COMs(0),
+      draw_stats(0),
+      draw_profile(0),
+      enable_warm_starting(1),
+      enable_continuous(1),
+      enable_sub_stepping(0),
+      pause(0),
       single_step(0)
     {}
-    //!this center defines center of the view of gui
-    b2Vec2 view_center; 
-    //!Sets the frequency of time step in Hertz
-    float32 hz; 
-    //!Stores number of velocity iterations which is number of pass over velocity constraints in a single time step
-    int32 velocity_iterations; 
-    //!Stores number of position iterations which is number of pass over position constraints in a single time step
-    int32 position_iterations; 
-    //!Stores whether to draw shapes in the gui or not : 0 disables showing 1 enables showing
-    int32 draw_shapes; 
-    //!Stores whether to draw joints in the gui or not : 0 disables showing 1 enables showing
-    int32 draw_joints; 
-    //!Stores whether to draw AABBs in the gui or not : 0 disables showing 1 enables showing
+    
+    b2Vec2 view_center;
+    float32 hz;
+    int32 velocity_iterations;
+    int32 position_iterations;
+    int32 draw_shapes;
+    int32 draw_joints;
     int32 draw_AABBs;
-    //!Stores whether to draw pairs in the gui or not : 0 disables showing 1 enables showing
-    int32 draw_pairs; 
-    //!Stores whether to draw contact points in the gui or not : 0 disables showing 1 enables showing
-    int32 draw_contact_points;  
-    //!Stores whether to draw contact normals in the gui or not : 0 disables showing 1 enables showing
-    int32 draw_contact_normals; 
-     //!Stores whether to draw contact forces in the gui or not : 0 disables showing 1 enables showing
+    int32 draw_pairs;
+    int32 draw_contact_points;
+    int32 draw_contact_normals;
     int32 draw_contact_forces;
-    //!Stores whether to draw frictional forces in the gui or not : 0 disables showing 1 enables showing
-    int32 draw_friction_forces; 
-    //!Stores whether to draw COMs (Centre of Mass) in the gui or not : 0 disables showing 1 enables showing
-    int32 draw_COMs; 
-    //!Stores whether to write statistics(no of bodies,contacts,joints,etc) in the gui or not : 0 disables showing 1 enables showing
-    int32 draw_stats; 
-    //!Stores whether to write profile (current velocity,position,etc) in the gui or not : 0 disables showing 1 enables showing
+    int32 draw_friction_forces;
+    int32 draw_COMs;
+    int32 draw_stats;
     int32 draw_profile;
-     //!Stores whether to enable or disable warm starting(warm starting: assigning the previous frames values for the accumulated impulse at the start of the frame. ) : 1 enable it 0 disables it
     int32 enable_warm_starting;
-    //!Stores whether to enable continous collision detection,etc :1 enables it 0 disables it
-    int32 enable_continuous; 
-    //!Stores whether to enable sub stepping (there is a sub-stepping solver that moves bodies to their first time of impact and then resolves the collision.) :1 enables it 0 disables it
-    int32 enable_sub_stepping; 
-    //!Store whether to pause or not:  1 pause it 0 plays it
-    int32 pause; 
-    //!Used to take a single step :stores 1 whenever a single step is called
-    int32 single_step; 
+    int32 enable_continuous;
+    int32 enable_sub_stepping;
+    int32 pause;
+    int32 single_step;
   };
   
-  
-  //! Struct to hold information of simulation and it's name
+  //! The Struct \a sim_t has 2 members
+  //!   - \c name which is a string
+  //!   - \c create_fcn which is a \a base_sim_t object which is the main object for simulation. 
   struct sim_t
   {
-  //! name of the simulation
-    const char *name; 
-    //! To create a simulation
-    sim_create_fcn *create_fcn; 
+    const char *name;
+    sim_create_fcn *create_fcn;
 
-//! set the initial value in the constructor to _name and _create_fcn
     sim_t(const char *_name, sim_create_fcn *_create_fcn): 
       name(_name), create_fcn(_create_fcn) {;}
   };
   
   extern sim_t *sim;
   
-  
   const int32 k_max_contact_points = 2048;  
-  //!Defines a single contact point 
-  struct contact_point_t 
+  //! Contact Point struct is used to store the fixtures of the 2 bodies which come into contact and the vectors of position and the normal of contact and the Position State
+  struct contact_point_t
   {
-  //!Defines one of the fixture in contact
-    b2Fixture* fixtureA; 
-    //!Defines another fixture in contact
-    b2Fixture* fixtureB; 
-    //!Defines the normal of the contact point
-    b2Vec2 normal; 
-    //!Defines position of the contact point 
-    b2Vec2 position; 
-    //!Stores state of points of contact
-    b2PointState state; 
+    b2Fixture* fixtureA;
+    b2Fixture* fixtureB;
+    b2Vec2 normal;
+    b2Vec2 position;
+    b2PointState state;
   };
   
-  
-  //!Class base_sim_t which is the base simulation inherited from b2ContactListener class to get contact information and holds all the information of the world
-  class base_sim_t : public b2ContactListener 
+  //! The Class \a base_sim_t
+  //!   - It is an inherited class from \c b2ContactListener which is used to get the contact details whenever some bodies come into contact.\n
+  //!   - It has the main world object as data member
+  //!   - It has the PreSolve function which is things to be done after collision detection
+  //!   - It has the Step function which is responsible for the motion of objects in the world!
+
+  class base_sim_t : public b2ContactListener
   {
   public:
     
     base_sim_t();
 
-    
-    //!Virtual destructors to virtually destroy objects so that no further contraints are solved for that body
+    //! Virtual destructors - amazing objects. Why are these necessary?
+    /*! - Virtual destructors are useful when you can delete an instance of a derived class through a pointer to base class.
+    * - Always make base classes' destructors virtual when they're meant to be manipulated polymorphically.
+    * - If you want to prevent the deletion of an instance through a base class pointer, you can make the base class destuctor protected and nonvirtual; by doing so, the compiler won't let you call delete on a base class pointer.
+    */
     virtual ~base_sim_t();
     
-    //!Set the max number of lines used when showing profile or statistics
-    void set_text_line(int32 line) { m_text_line = line; } 
+    void set_text_line(int32 line) { m_text_line = line; }
+    void draw_title(int x, int y, const char *string);
     
-    //!To write the title in given x and y coordinate of a particular name(string)
-    void draw_title(int x, int y, const char *string); 
-    
-    //!Function called for taking a single step with parameters as settings of the simulation
-    virtual void step(settings_t* settings); 
+    virtual void step(settings_t* settings);
 
-    //!To label that key is not used in the simulation otherwise compiler would complain of the unsued value
-    virtual void keyboard(unsigned char key) { B2_NOT_USED(key); } 
-    //!To label that key is not used in the simulation otherwise compiler would complain of the unsued value
-    virtual void keyboard_up(unsigned char key) { B2_NOT_USED(key); } 
+    virtual void keyboard(unsigned char key) { B2_NOT_USED(key); }
+    virtual void keyboard_up(unsigned char key) { B2_NOT_USED(key); }
 
-    //!To label that shift_mouse_down is not used in the simulation otherwise compiler would complain of the unsued value
-    void shift_mouse_down(const b2Vec2& p) { B2_NOT_USED(p); } 
-    
-    //!To label that mouse_down is not used in the simulation otherwise compiler would complain of the unsued value
-    virtual void mouse_down(const b2Vec2& p) { B2_NOT_USED(p); } 
-    //!To label that mouse_up is not used in the simulation otherwise compiler would complain of the unsued value
-    virtual void mouse_up(const b2Vec2& p) { B2_NOT_USED(p); } 
-    
-    
-    //!To label that mouse_move is not used in the simulation otherwise compiler would complain of the unsued value
-    void mouse_move(const b2Vec2& p) { B2_NOT_USED(p); } 
+    void shift_mouse_down(const b2Vec2& p) { B2_NOT_USED(p); }
+    virtual void mouse_down(const b2Vec2& p) { B2_NOT_USED(p); }
+    virtual void mouse_up(const b2Vec2& p) { B2_NOT_USED(p); }
+    void mouse_move(const b2Vec2& p) { B2_NOT_USED(p); }
 
     
-    //! Let derived tests know that a joint was destroyed.
-    virtual void joint_destroyed(b2Joint* joint) { B2_NOT_USED(joint); } 
-        
+    // Let derived tests know that a joint was destroyed.
+    virtual void joint_destroyed(b2Joint* joint) { B2_NOT_USED(joint); }
+    
     // Callbacks for derived classes.
-    
-    //!To set that begin_contact function does not calculate anything
-    virtual void begin_contact(b2Contact* contact) { B2_NOT_USED(contact); } 
-    
-    //!To label that end_contact function does not do anything
-    virtual void end_contact(b2Contact* contact) { B2_NOT_USED(contact); } 
-    //!To pre-solve a contact event with parameters as the contact event and manifold which stores information of contacting points , normal , local point and number of points of contact
-    virtual void pre_solve(b2Contact* contact, const b2Manifold* oldManifold); 
-    
-    //!Post-solve event of contact usually used to gather collision impulse results but not used int his since we do not care about impulses
-    virtual void post_solve(const b2Contact* contact, const b2ContactImpulse* impulse) 
+    virtual void begin_contact(b2Contact* contact) { B2_NOT_USED(contact); }
+    virtual void end_contact(b2Contact* contact) { B2_NOT_USED(contact); }
+    virtual void pre_solve(b2Contact* contact, const b2Manifold* oldManifold);
+    virtual void post_solve(const b2Contact* contact, const b2ContactImpulse* impulse)
     {
       B2_NOT_USED(contact);
       B2_NOT_USED(impulse);
     }
 
-  //!Protected members : Different from private members as private function of this class is inaccesible to the inheriters of the classes which inherit this function
+	inline b2World* get_world(void){
+		return m_world;
+	}
+	
+  //!How are protected members different from private memebers of a class in C++ ?
+    /*! - Private members are only accessible within the class defining them.\n
+          Protected members are accessible in the class that defines them and in classes that inherit from that class.
+      * - Both are also accessible by friends of their class, and in the case of protected members, by friends of their derived classes.
+    */
+
+
   protected:
 
-    //! defined as friend class to access private and protected members of this class
-    friend class contact_listener_t; 
+    //! What are Friend classes?
+    /*! - A friend class in C++, can access the "private" and "protected" members of the class in which it is declared as a friend.
+     * - On declaration of friend class all member function of the friend class become friends of the class in which the friend class was declared.
+     * - Friend status is not inherited; every friendship has to be explicitly declared.
+     * - Friend classes can help in improving Encapsulation if used wisely.
+    */
+    friend class contact_listener_t;
     
-    //! defines the ground of the world of simulation
     b2Body* m_ground_body;
-    
-    //! defines the world of AABBs
     b2AABB m_world_AABB;
-    
-    //!Variable to store all the possible contact points of the world
     contact_point_t m_points[k_max_contact_points];
-    
-    //! stores the count of contact points of the world
-    int32 m_point_count; 
+    int32 m_point_count;
 
-   //! To help be debug drawing
     debug_draw_t m_debug_draw;
-    
-    //! store the number of text lines in the world
     int32 m_text_line;
-    //! Defines the world of the simulation
     b2World* m_world;
 
-    //!Store the step counts of the world
     int32 m_step_count;
     
-    //!Stores profilind data which is maximum time in milli seconds for each member eg. step,collide ,solve ,init
-    b2Profile m_max_profile; 
-    //!stores current profiling data which is current time in milli seconds for each member eg. step,collide,solve,etc.
+    b2Profile m_max_profile;
     b2Profile m_total_profile;
   };
 }

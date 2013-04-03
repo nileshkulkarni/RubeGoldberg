@@ -4,10 +4,8 @@
  * Instructor: Parag Chaudhuri
  */
 
-//! These are user defined include files
-//! Included in double quotes - the path to find these has to be given at compile time
-#include "callbacks.hpp"
 
+#include "callbacks.hpp"
 #ifndef __APPLE__
 #include "GL/glui.h"
 #else
