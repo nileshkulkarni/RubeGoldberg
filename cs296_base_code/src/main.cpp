@@ -41,9 +41,7 @@
 //! These are usually available at standard system paths like /usr/include
 //! Read about the use of include files in C++
 #include <cstdio>
-#include <iostream>
-#include <cstdlib>
-#include <sys/time.h>
+
 
 //! Notice the use of extern. Why is it used here?
 namespace cs296
@@ -67,7 +65,6 @@ using namespace cs296;
 
 
 //! This function creates all the GLUI gui elements
-//Not called!!
 void create_glui_ui(void)
 {
   GLUI *glui = GLUI_Master.create_glui_subwindow( main_window, GLUI_SUBWINDOW_BOTTOM );
@@ -123,43 +120,33 @@ int main(int argc, char** argv)
   
   entry = sim;
   test = entry->create_fcn();
-  
-  //Lab 4 and 5
-  int no_itr = atoi(argv[1]);
-  float tot_time = 0.0f;
-  float tot_col_time = 0.0f;
-  float tot_pos_time = 0.0f;
-  float tot_vel_time = 0.0f;
-  float tot_loop_time = 0.0f;
-  struct timeval t_start, t_end;
 
-  
-  float32 time_step = 1.0f / settings_hz;
+  //! This initializes GLUT
+  glutInit(&argc, argv);
+  glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
+  glutInitWindowSize(width, height);
 
-  gettimeofday(&t_start, NULL);
-  for (int i = 0; i < no_itr; i++){
-    b2World* world = test->get_world();
-    b2Profile profile = world->GetProfile();
+  char title[50];
+  sprintf(title, "CS296 Base Code. Running on Box2D %d.%d.%d", b2_version.major, b2_version.minor, b2_version.revision);
+  main_window = glutCreateWindow(title);
 
-    world->Step(time_step, settings.velocity_iterations, settings.position_iterations);
+  //! Here we setup all the callbacks we need
+  //! Some are set via GLUI
+  GLUI_Master.set_glutReshapeFunc(callbacks_t::resize_cb);  
+  GLUI_Master.set_glutKeyboardFunc(callbacks_t::keyboard_cb);
+  GLUI_Master.set_glutSpecialFunc(callbacks_t::keyboard_special_cb);
+  GLUI_Master.set_glutMouseFunc(callbacks_t::mouse_cb);
+  //! Others are set directly
+  glutDisplayFunc(callbacks_t::display_cb);
+  glutMotionFunc(callbacks_t::mouse_motion_cb);
+  glutKeyboardUpFunc(callbacks_t::keyboard_up_cb); 
+  glutTimerFunc(frame_period, callbacks_t::timer_cb, 0);
 
-    //To print out | tc of the units
-    tot_time += profile.step;
-    tot_col_time += profile.collide;
-    tot_pos_time += profile.solvePosition;
-    tot_vel_time += profile.solveVelocity;
-  }
-  gettimeofday(&t_end, NULL);
+  //! We create the GLUI user interface
+  create_glui_ui();
 
-  //1st part is seconds, seconds part is microseconds
-  tot_loop_time = (t_end.tv_sec - t_start.tv_sec)*1000 + (t_end.tv_usec - t_start.tv_usec)/1000.0f;
-
-  printf("Total Iterations: %d \n",no_itr);
-  printf("Average time per step is %5.4f ms \n",tot_time/no_itr);
-  printf("Average time for collisions is %5.4f ms \n",tot_col_time/no_itr);
-  printf("Average time for velocity updates is %5.4f ms \n",tot_vel_time/no_itr);
-  printf("Average time for position updates is %5.4f ms \n",tot_pos_time/no_itr);
-  printf("Total time for loop is %5.4f ms\n",tot_loop_time);
+  //! Enter the infinite GLUT event loop
+  glutMainLoop();
   
   return 0;
 }

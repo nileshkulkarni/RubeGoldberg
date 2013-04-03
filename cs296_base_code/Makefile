@@ -15,7 +15,7 @@ DOXYGEN = doxygen
 TARGET = cs296_base
 
 # Project Paths
-PROJECT_ROOT=/home/rj/Desktop/cs296/g28_lab07/cs296_base_code
+PROJECT_ROOT=/home/nilesh/dev/RubeGoldberg/cs296_base_code
 EXTERNAL_ROOT=$(PROJECT_ROOT)/external
 SRCDIR = $(PROJECT_ROOT)/src
 OBJDIR = $(PROJECT_ROOT)/obj
