@@ -26,10 +26,16 @@
 #ifndef _CS296BASE_HPP_
 #define _CS296BASE_HPP_
 
+#ifndef __APPLE__
+#include "GL/glui.h"
+#else
+#include "GL/glui.h"
+#endif
+#include<iostream>
 #include "render.hpp"
 #include <Box2D/Box2D.h>
 #include <cstdlib>
-
+#include <unistd.h>
 #define	RAND_LIMIT 32767
 
 namespace cs296
@@ -55,7 +61,8 @@ namespace cs296
   */
   class base_sim_t;
   struct settings_t;
-  
+
+
   //! Why do we use a typedef
   /*! - A typedef declaration introduces a name that, within its scope, becomes a synonym for the type given by the type-declaration portion of the declaration
   * - typedef is helpful for giving a short, sharp alias to complicated function pointer types
@@ -67,7 +74,7 @@ namespace cs296
   - \c settings_t() : The constructor will set the required values of settings members. 
   - \c The members in the struct settings_t can be changed to configure the simulation in the world.
   - \c view_center : sets the position of the centre of the view.
-  - \c hz : It is the inverse of the time of an iteration.
+/  - \c hz : It is the inverse of the time of an iteration.
   - \c velocity_iterations : the value in steps in which velocity changes.
   - \c position_iterations : the value in steps in which velocity changes. 
   - \c draw_shapes : if set 1,draws the shapes of bodies otherwise no.
@@ -98,8 +105,8 @@ namespace cs296
       draw_pairs(0),
       draw_contact_points(0),
       draw_contact_normals(0),
-      draw_contact_forces(0),
-      draw_friction_forces(0),
+      draw_contact_forces(1),
+      draw_friction_forces(1),
       draw_COMs(0),
       draw_stats(0),
       draw_profile(0),
@@ -141,7 +148,7 @@ namespace cs296
     sim_create_fcn *create_fcn;
 
     sim_t(const char *_name, sim_create_fcn *_create_fcn): 
-      name(_name), create_fcn(_create_fcn) {;}
+				  create_fcn(_create_fcn) {;}
   };
   
   extern sim_t *sim;
@@ -162,6 +169,80 @@ namespace cs296
   //!   - It has the main world object as data member
   //!   - It has the PreSolve function which is things to be done after collision detection
   //!   - It has the Step function which is responsible for the motion of objects in the world!
+class Ball
+{
+	private:
+		bool m_contact	;
+		b2World* my_world;
+	public:	
+		Ball(b2World* m_world){
+		m_contact = false;	
+
+		b2Body* spherebody;
+		b2CircleShape circle;
+      	circle.m_radius = 2.0;
+    
+     
+	  b2FixtureDef ballfd;
+      ballfd.shape = &circle;
+      ballfd.density = 1.0f;
+      ballfd.friction = 0.0f;
+      ballfd.restitution = 1.0f;
+
+    b2BodyDef ballbd;
+      ballbd.type = b2_dynamicBody;
+      ballbd.position.Set(0,20.0f);
+      spherebody = m_world->CreateBody(&ballbd);
+      spherebody->CreateFixture(&ballfd);
+	  spherebody->SetUserData(this);
+		
+		
+		}
+
+	void startContact() { 
+			std::cout<<"Detected\n";
+			m_contact = true; }
+  	void endContact() { m_contact = false; }
+	void render(){
+			std::cout<<"Called me\n";	
+		
+	}
+};
+
+
+class MyContactListener : public b2ContactListener
+  {
+    void BeginContact(b2Contact* contact) {
+  
+      //check if fixture A was a ball
+      void* bodyUserData = contact->GetFixtureA()->GetBody()->GetUserData();
+      if ( bodyUserData ){
+        static_cast<Ball*>( bodyUserData )->startContact();
+        static_cast<Ball*>( bodyUserData )->render();
+	  }
+      //check if fixture B was a ball
+      bodyUserData = contact->GetFixtureB()->GetBody()->GetUserData();
+      if ( bodyUserData ){
+        static_cast<Ball*>( bodyUserData )->startContact(); 
+	  }  static_cast<Ball*>( bodyUserData )->render();
+    
+}
+  
+    void EndContact(b2Contact* contact) {
+  
+      //check if fixture A was a ball
+      void* bodyUserData = contact->GetFixtureA()->GetBody()->GetUserData();
+      if ( bodyUserData )
+        static_cast<Ball*>( bodyUserData )->endContact();
+  
+      //check if fixture B was a ball
+      bodyUserData = contact->GetFixtureB()->GetBody()->GetUserData();
+      if ( bodyUserData )
+        static_cast<Ball*>( bodyUserData )->endContact();
+  
+    }
+ 
+};
 
   class base_sim_t : public b2ContactListener
   {
@@ -194,8 +275,8 @@ namespace cs296
     virtual void joint_destroyed(b2Joint* joint) { B2_NOT_USED(joint); }
     
     // Callbacks for derived classes.
-    virtual void begin_contact(b2Contact* contact) { B2_NOT_USED(contact); }
-    virtual void end_contact(b2Contact* contact) { B2_NOT_USED(contact); }
+    virtual void begin_contact(b2Contact* contact);
+    virtual void end_contact(b2Contact* contact);
     virtual void pre_solve(b2Contact* contact, const b2Manifold* oldManifold);
     virtual void post_solve(const b2Contact* contact, const b2ContactImpulse* impulse)
     {
@@ -231,13 +312,19 @@ namespace cs296
 
     debug_draw_t m_debug_draw;
     int32 m_text_line;
-    b2World* m_world;
+	MyContactListener mycontact;    
+	b2World* m_world;
+
+	
 
     int32 m_step_count;
     
     b2Profile m_max_profile;
     b2Profile m_total_profile;
   };
+
+ 
+
 }
 
 #endif

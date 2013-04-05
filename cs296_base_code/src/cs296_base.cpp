@@ -27,6 +27,7 @@ base_sim_t::base_sim_t()
 	b2Vec2 gravity;
 	gravity.Set(0.0f, -10.0f);
 	m_world = new b2World(gravity);
+	m_world->SetContactListener(&mycontact);	
 
 	m_text_line = 30;
 
@@ -84,6 +85,43 @@ void base_sim_t::draw_title(int x, int y, const char *string)
 {
     m_debug_draw.DrawString(x, y, string);
 }
+
+
+void base_sim_t::begin_contact(b2Contact *contact){
+
+		std::cout<<"Here inside begin_contact\n";
+
+		void* bodyUserData = contact->GetFixtureA()->GetBody()->GetUserData();
+		if ( bodyUserData )
+			static_cast<Ball*>( bodyUserData )->startContact();
+		//check if fixture B was a ball	
+		bodyUserData = contact->GetFixtureB()->GetBody()->GetUserData();
+		if ( bodyUserData )
+			 static_cast<Ball*>( bodyUserData )->startContact();
+
+}
+void base_sim_t::end_contact(b2Contact* contact) {
+  
+      //check if fixture A was a ball
+      void* bodyUserData = contact->GetFixtureA()->GetBody()->GetUserData();
+      if ( bodyUserData ){
+        static_cast<Ball*>( bodyUserData )->endContact();
+        static_cast<Ball*>( bodyUserData )->render();
+	  
+	  }
+
+      //check if fixture B was a ball
+      bodyUserData = contact->GetFixtureB()->GetBody()->GetUserData();
+      if ( bodyUserData ){
+        static_cast<Ball*>( bodyUserData )->endContact();
+        static_cast<Ball*>( bodyUserData )->render();
+  	}
+    
+	}
+
+
+
+
 
 void base_sim_t::step(settings_t* settings)
 {
@@ -231,16 +269,16 @@ void base_sim_t::step(settings_t* settings)
 	  else if (settings->draw_contact_forces == 1)
 	    {
 	      //b2Vec2 p1 = point->position;
-	      //b2Vec2 p2 = p1 + k_forceScale * point->normalForce * point->normal;
+	     // b2Vec2 p2 = p1 + k_forceScale * point->normalForce * point->normal;
 	      //DrawSegment(p1, p2, b2Color(0.9f, 0.9f, 0.3f));
 	    }
 	  
 	  if (settings->draw_friction_forces == 1)
 	    {
 	      //b2Vec2 tangent = b2Cross(point->normal, 1.0f);
-	      //b2Vec2 p1 = point->position;
-	      //b2Vec2 p2 = p1 + k_forceScale * point->tangentForce * tangent;
-	      //DrawSegment(p1, p2, b2Color(0.9f, 0.9f, 0.3f));
+	     // b2Vec2 p1 = point->position;
+	     // b2Vec2 p2 = p1 + k_forceScale * point->tangentForce * tangent;
+	     // DrawSegment(p1, p2, b2Color(0.9f, 0.9f, 0.3f));
 	    }
 	}
     }
