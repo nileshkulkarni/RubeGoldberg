@@ -185,24 +185,26 @@ class Ball
 		std::thread musicThread;
 		pthread_t t1;
 		bool calledOnce;
+		bool calledTwice;
 	public:	
 		Ball(b2World* m_world){
 		m_contact = false;	
 		calledOnce=false;
+		calledTwice=false;
 		b2Body* spherebody;
 		b2CircleShape circle;
-      	circle.m_radius = 2.0;
+      	circle.m_radius = 0.5;
     
      
 	  b2FixtureDef ballfd;
       ballfd.shape = &circle;
       ballfd.density = 1.0f;
       ballfd.friction = 0.0f;
-      ballfd.restitution =0.75f;
+      ballfd.restitution =0.0f;
 
-    b2BodyDef ballbd;
+     b2BodyDef ballbd;
       ballbd.type = b2_dynamicBody;
-      ballbd.position.Set(0,50.0f);
+    	ballbd.position.Set(37.0f,13.0f);
       spherebody = m_world->CreateBody(&ballbd);
       spherebody->CreateFixture(&ballfd);
 	  spherebody->SetUserData(this);
@@ -237,12 +239,13 @@ class Ball
    			pthread_detach(t1);	}
 	void render(){
 		if(1){
-			if(calledOnce){
+			if(calledTwice){
 				
 				
 			pthread_cancel(t1);
 			}
-			calledOnce=true;
+			if(calledOnce){
+					calledTwice=true;
 			
 			int result = pthread_create(&t1,0,Ball::play,this);	
 			
@@ -252,6 +255,8 @@ class Ball
 			//std::swap(thr,musicThread);
 			
 			std::cout<<"here\n";
+			}
+			calledOnce=true;
 		}
 			/*	int a=1;
 			std::cout<<"Called me\n";	
