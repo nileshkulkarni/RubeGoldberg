@@ -470,7 +470,7 @@ namespace cs296
       ballfd.shape = &circle;
       ballfd.density = 1.0f;
       ballfd.friction = 0.0f;
-      ballfd.restitution = 0.0f;
+      ballfd.restitution = 1.0f;
       
       b2BodyDef ballbd;
       ballbd.type = b2_dynamicBody;
@@ -481,16 +481,52 @@ namespace cs296
 }
 //****************************
 
+	
+	{
+		b2BodyDef* bd = new b2BodyDef;
+		bd->fixedRotation=true;
+			
+		b2FixtureDef *fd1 = new b2FixtureDef;
 
+		fd1->shape = new b2PolygonShape;
+		b2PolygonShape bs1;
+		bs1.SetAsBox(5.5,0.2,b2Vec2(40,-1),0);
+		fd1->shape= &bs1;
+		b2Body * box2 = m_world->CreateBody(bd);
+		box2->CreateFixture(fd1);
+
+	
+	
+	
+	}
+
+
+	{
+		b2BodyDef* bd = new b2BodyDef;
+		bd->fixedRotation=true;
+			
+		b2FixtureDef *fd1 = new b2FixtureDef;
+
+		fd1->shape = new b2PolygonShape;
+		b2PolygonShape bs1;
+		bs1.SetAsBox(2,1,b2Vec2(40,0),0);
+		fd1->shape= &bs1;
+		b2Body * box2 = m_world->CreateBody(bd);
+		box2->CreateFixture(fd1);
+
+	
+	
+	
+	}		Ball *b= new Ball(m_world,38,1,42,1);
 //bar below dominos to which the ball will collide and produce sound
-{
+/*{
 	b2EdgeShape shape;
 	shape.Set(b2Vec2(36.0f,8.0f),b2Vec2(43.0f,8.0f));
 
 	b2BodyDef bd;
 	b1 = m_world->CreateBody(&bd);
 	b1->CreateFixture(&shape,0.0f);
-}
+}*/
 //Right Side Slants
   b2EdgeShape shape;
   
@@ -628,7 +664,49 @@ namespace cs296
       myjoint->Initialize(box1, box2, worldAnchorGround1, worldAnchorGround2, box1->GetWorldCenter(), box2->GetWorldCenter(), ratio);
       m_world->CreateJoint(myjoint);
     }
-  
+ 
+
+
+	{
+		b2BodyDef* bd = new b2BodyDef;
+		bd->fixedRotation=true;
+			
+		b2FixtureDef *fd1 = new b2FixtureDef;
+
+		fd1->shape = new b2PolygonShape;
+		b2PolygonShape bs1;
+		bs1.SetAsBox(5.5,0.2,b2Vec2(0,-9),0);
+		fd1->shape= &bs1;
+		b2Body * box2 = m_world->CreateBody(bd);
+		box2->CreateFixture(fd1);
+
+	
+	
+	
+	}
+
+
+	{
+		b2BodyDef* bd = new b2BodyDef;
+		bd->fixedRotation=true;
+			
+		b2FixtureDef *fd1 = new b2FixtureDef;
+
+		fd1->shape = new b2PolygonShape;
+		b2PolygonShape bs1;
+		bs1.SetAsBox(2.5,1,b2Vec2(0,-10.1),0);
+		fd1->shape= &bs1;
+		b2Body * box2 = m_world->CreateBody(bd);
+		box2->CreateFixture(fd1);
+
+	
+	
+	
+	}
+
+	//no adding the second alarm thing here;
+	//
+	Ball * Alarm2 = new Ball(m_world,-2.5,-11.1,2.5,-11.1);
      
      float pi=3.14;
      float centrex=19.7f,centrey=3.0f,radius=4.5f;

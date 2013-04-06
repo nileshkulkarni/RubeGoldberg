@@ -101,7 +101,7 @@ namespace cs296
     //! Data members of a class can be initialised using the constructor of class.
     
     settings_t() :
-      view_center(0.0f, 20.0f),
+      view_center(0.0f, 10.0f),
       hz(60.0f),
       velocity_iterations(8),
       position_iterations(3),
@@ -187,24 +187,18 @@ class Ball
 		bool calledOnce;
 		bool calledTwice;
 	public:	
-		Ball(b2World* m_world){
+		Ball(b2World* m_world,float startX,float startY,float stopX,float stopY ){
 		m_contact = false;	
 		calledOnce=false;
 		calledTwice=false;
 		b2Body* spherebody;
-		b2CircleShape circle;
-      	circle.m_radius = 0.5;
-    
+		b2EdgeShape edge;
+ 		edge.Set(b2Vec2(startX,startY),b2Vec2(stopX,stopY))  ; 
      
 	  b2FixtureDef ballfd;
-      ballfd.shape = &circle;
-      ballfd.density = 1.0f;
-      ballfd.friction = 0.0f;
-      ballfd.restitution =0.0f;
+      ballfd.shape = &edge;
 
      b2BodyDef ballbd;
-      ballbd.type = b2_dynamicBody;
-    	ballbd.position.Set(37.0f,13.0f);
       spherebody = m_world->CreateBody(&ballbd);
       spherebody->CreateFixture(&ballfd);
 	  spherebody->SetUserData(this);
@@ -214,7 +208,7 @@ class Ball
 	static void* play(void*){
 		std::cout<<"threading is working";
 		//usleep(1000000);
-		system("mpg123 src/song.mp3");
+		system("mpg123 src/alarm.mp3");
 		
 		return NULL;
 	}
@@ -239,15 +233,20 @@ class Ball
    			pthread_detach(t1);	}
 	void render(){
 		if(1){
-			if(calledTwice){
+			if(calledOnce && !calledTwice){
 				
 				
-			pthread_cancel(t1);
+		//	pthread_cancel(t1);
 			}
-			if(calledOnce){
-					calledTwice=true;
+
+			if(!calledOnce && !calledTwice){
+				int result = pthread_create(&t1,0,Ball::play,this);	
+				calledOnce=true;
+			}
+			else if(calledOnce){
 			
-			int result = pthread_create(&t1,0,Ball::play,this);	
+			calledTwice=true;
+			
 			
 			std::string msg1 ("hello");
 			
