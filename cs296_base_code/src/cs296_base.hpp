@@ -31,13 +31,19 @@
 #else
 #include "GL/glui.h"
 #endif
+#include<string>
 #include<iostream>
 #include "render.hpp"
 #include <Box2D/Box2D.h>
 #include <cstdlib>
 #include <unistd.h>
 #define	RAND_LIMIT 32767
+#include <thread>
 
+extern "C"
+{
+#include<pthread.h>
+}
 namespace cs296
 {
 
@@ -168,12 +174,15 @@ namespace cs296
   //!   - It is an inherited class from \c b2ContactListener which is used to get the contact details whenever some bodies come into contact.\n
   //!   - It has the main world object as data member
   //!   - It has the PreSolve function which is things to be done after collision detection
-  //!   - It has the Step function which is responsible for the motion of objects in the world!
+ 
+
+ //!   - It has the Step function which is responsible for the motion of objects in the world!
 class Ball
 {
 	private:
 		bool m_contact	;
 		b2World* my_world;
+		std::thread musicThread;
 	public:	
 		Ball(b2World* m_world){
 		m_contact = false;	
@@ -198,23 +207,40 @@ class Ball
 		
 		
 		}
-
+	void play1(int a){
+		std::cout<<"threading is working";
+		 system("mpg123 src/song.mp3");
+		usleep(100*1000);
+		return;
+	}
 	void startContact() { 
 			std::cout<<"Detected\n";
 			m_contact = true; }
   	void endContact() { m_contact = false; }
 	void render(){
+			pthread_t t1;
+	
+			std::string msg1 ("hello");
+			std::thread thr(&Ball::play1, this,10);
+			std::swap(thr,musicThread);
+		/*	int a=1;
 			std::cout<<"Called me\n";	
-		
+			int create1 = pthread_create( &t1, NULL,cs296::Ball::play1,reinterpret_cast<void*>(&msg1));
+		*/	
 	}
-};
+	void musicThreadjoin(){
+	musicThread.join();
+	}
 
+
+	
+
+};
 
 class MyContactListener : public b2ContactListener
   {
     void BeginContact(b2Contact* contact) {
   
-      //check if fixture A was a ball
       void* bodyUserData = contact->GetFixtureA()->GetBody()->GetUserData();
       if ( bodyUserData ){
         static_cast<Ball*>( bodyUserData )->startContact();
@@ -224,23 +250,28 @@ class MyContactListener : public b2ContactListener
       bodyUserData = contact->GetFixtureB()->GetBody()->GetUserData();
       if ( bodyUserData ){
         static_cast<Ball*>( bodyUserData )->startContact(); 
-	  }  static_cast<Ball*>( bodyUserData )->render();
+	  
+	    static_cast<Ball*>( bodyUserData )->render();
     
+	  }
 }
   
     void EndContact(b2Contact* contact) {
   
       //check if fixture A was a ball
       void* bodyUserData = contact->GetFixtureA()->GetBody()->GetUserData();
-      if ( bodyUserData )
+      if ( bodyUserData ){
         static_cast<Ball*>( bodyUserData )->endContact();
-  
+		static_cast<Ball*>( bodyUserData )->musicThreadjoin();
+	  }
       //check if fixture B was a ball
       bodyUserData = contact->GetFixtureB()->GetBody()->GetUserData();
-      if ( bodyUserData )
+      if ( bodyUserData ){
         static_cast<Ball*>( bodyUserData )->endContact();
-  
+ 		 
+		static_cast<Ball*>( bodyUserData )->musicThreadjoin();
     }
+	}
  
 };
 
