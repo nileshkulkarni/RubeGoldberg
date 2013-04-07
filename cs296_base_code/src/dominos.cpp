@@ -65,6 +65,8 @@ namespace cs296
 	b2 = m_world->CreateBody(&bd);
 	b2->CreateFixture(&shape, 10.0f);
       }
+      
+      
 	
       b2Body* b4;
       {
@@ -486,7 +488,7 @@ namespace cs296
 }
 //****************************
 
-	
+//Alarms 	
 	{
 		b2BodyDef* bd = new b2BodyDef;
 		bd->fixedRotation=true;
@@ -515,7 +517,7 @@ namespace cs296
 		fd1->shape= &bs1;
 		b2Body * box2 = m_world->CreateBody(bd);
 		box2->CreateFixture(fd1);
-
+//ends 
 	
 	
 	
@@ -613,7 +615,7 @@ namespace cs296
   {
       b2Body* shelf;
       
-      shape.Set(b2Vec2(-16.0f, -3.0f), b2Vec2(10.0f, 0.0f));
+      shape.Set(b2Vec2(-23.0f, -5.0f), b2Vec2(10.0f, -2.0f));
 	
       b2BodyDef bd;
       shelf = m_world->CreateBody(&bd);
@@ -629,7 +631,7 @@ namespace cs296
     {
       b2BodyDef *bd = new b2BodyDef;
       bd->type = b2_dynamicBody;
-      bd->position.Set(shiftX-13,shiftY);
+      bd->position.Set(shiftX-16,shiftY-1);
       bd->fixedRotation = true;
       
       //The open box
@@ -666,17 +668,17 @@ namespace cs296
       box1->CreateFixture(fd3);
 
       //The bar attached to pulley
-      bd->position.Set(shiftX+6,shiftY);	
-      fd1->density = 30.0;	  //Can set this
+      bd->position.Set(shiftX+7,shiftY-1);	
+      fd1->density = 43.0;	  //Can set this
       b2Body* box2 = m_world->CreateBody(bd);
       box2->CreateFixture(fd1);
 
       // The pulley joint
       b2PulleyJointDef* myjoint = new b2PulleyJointDef();
-      b2Vec2 worldAnchorOnBody1(shiftX-13, shiftY); // Anchor point on body 1 in world axis
-      b2Vec2 worldAnchorOnBody2(shiftX+6, shiftY); // Anchor point on body 2 in world axis
-      b2Vec2 worldAnchorGround1(shiftX-13, shiftY+5); // Anchor point for ground 1 in world axis
-      b2Vec2 worldAnchorGround2(shiftX+6, shiftY+5); // Anchor point for ground 2 in world axis
+      b2Vec2 worldAnchorOnBody1(shiftX-16, shiftY-2); // Anchor point on body 1 in world axis
+      b2Vec2 worldAnchorOnBody2(shiftX+7, shiftY-1); // Anchor point on body 2 in world axis
+      b2Vec2 worldAnchorGround1(shiftX-16, shiftY-1); // Anchor point for ground 1 in world axis
+      b2Vec2 worldAnchorGround2(shiftX+7, shiftY+4); // Anchor point for ground 2 in world axis
       float32 ratio = 1.0f; // Define ratio
       myjoint->Initialize(box1, box2, worldAnchorGround1, worldAnchorGround2, box1->GetWorldCenter(), box2->GetWorldCenter(), ratio);
       m_world->CreateJoint(myjoint);
@@ -694,7 +696,7 @@ namespace cs296
 
 		fd1->shape = new b2PolygonShape;
 		b2PolygonShape bs1;
-		bs1.SetAsBox(3.5,0.2,b2Vec2(0,-9),0);
+		bs1.SetAsBox(5.5,0.2,b2Vec2(0,-9),0);
 		fd1->shape= &bs1;
 		b2Body * box2 = m_world->CreateBody(bd);
 		box2->CreateFixture(fd1);
@@ -734,7 +736,7 @@ namespace cs296
      }
      
      {
-     shape.Set(b2Vec2(centrex+radius*cos(pi*50/100.0f),centrey-radius*sin(pi*50/100.0f)), b2Vec2(centrex+radius*cos(pi*(50)/100.0f)-10, centrey-radius*sin(pi*(50)/100.0f)+2));
+     shape.Set(b2Vec2(centrex+radius*cos(pi*50/100.0f),centrey-radius*sin(pi*50/100.0f)), b2Vec2(centrex+radius*cos(pi*(50)/100.0f)-10, centrey-radius*sin(pi*(50)/100.0f)));
      b2Body* rightslant1;
      	  b2BodyDef bd;
       rightslant1 = m_world->CreateBody(&bd);
@@ -856,7 +858,7 @@ namespace cs296
     }
 
 
-
+/*
 //The star right
     {
       b2PolygonShape shape;
@@ -899,7 +901,7 @@ namespace cs296
 
 
     }
-
+*/
 
    
 
