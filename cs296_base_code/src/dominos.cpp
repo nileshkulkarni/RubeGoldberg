@@ -669,7 +669,7 @@ namespace cs296
 
       //The bar attached to pulley
       bd->position.Set(shiftX+7,shiftY-1);	
-      fd1->density = 40.0;	  //Can set this
+      fd1->density = 37.0;	  //Can set this
       b2Body* box2 = m_world->CreateBody(bd);
       box2->CreateFixture(fd1);
 
