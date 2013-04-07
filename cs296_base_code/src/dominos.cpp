@@ -472,12 +472,11 @@ namespace cs296
 	
       b2CircleShape circle;
       circle.m_radius = 0.6;
-	
       b2FixtureDef ballfd;
       ballfd.shape = &circle;
       ballfd.density = 1.0f;
       ballfd.friction = 0.0f;
-      ballfd.restitution = 0.0f;
+      ballfd.restitution = 0.75f;
       
       b2BodyDef ballbd;
       ballbd.type = b2_dynamicBody;
