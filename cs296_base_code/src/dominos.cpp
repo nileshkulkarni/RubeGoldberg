@@ -254,13 +254,13 @@ namespace cs296
       b2Body* spherebody;
 	
       b2CircleShape circle;
-      circle.m_radius = 0.5;
+      circle.m_radius = 0.6;
 	
       b2FixtureDef ballfd;
       ballfd.shape = &circle;
       ballfd.density = 1.0f;
       ballfd.friction = 0.0f;
-      ballfd.restitution = 0.5f;
+      ballfd.restitution = 0.0f;
 	
       for (int i = 0; i < 4; ++i)
     	{
@@ -342,7 +342,7 @@ namespace cs296
       {
       	  b2BodyDef bd;
       	  bd.type = b2_dynamicBody;
-      	  bd.position.Set(11.25f + 1.0f * i, 18.6f);
+      	  bd.position.Set(12.0f + 1.0f * i, 18.6f);
       	  b2Body* body = m_world->CreateBody(&bd);
       	  body->CreateFixture(&fd);
       }
@@ -431,11 +431,11 @@ namespace cs296
       fd.density = 20.0f;
       fd.friction = 0.1f;
 		
-      for (int i = 0; i < 6; ++i)
+      for (int i = 0; i < 5; ++i)
     	{
     	  b2BodyDef bd;
     	  bd.type = b2_dynamicBody;
-    	  bd.position.Set(26.25f + 1.0f * i, 12.5f);
+    	  bd.position.Set(27.0f + 1.0f * i, 12.5f);
     	  b2Body* body = m_world->CreateBody(&bd);
     	  body->CreateFixture(&fd);
     	}
@@ -456,7 +456,7 @@ namespace cs296
     	{
     	  b2BodyDef bd;
     	  bd.type = b2_dynamicBody;
-    	  bd.position.Set(32.5f + 1.0f * i, 13.5f);
+    	  bd.position.Set(32.0f + 1.0f * i, 13.5f);
     	  b2Body* body = m_world->CreateBody(&bd);
     	  body->CreateFixture(&fd);
     	}
@@ -475,7 +475,7 @@ namespace cs296
       ballfd.shape = &circle;
       ballfd.density = 1.0f;
       ballfd.friction = 0.0f;
-      ballfd.restitution = 1.0f;
+      ballfd.restitution = 0.0f;
       
       b2BodyDef ballbd;
       ballbd.type = b2_dynamicBody;
@@ -537,19 +537,25 @@ namespace cs296
   
   {
       b2Body* rightslant1;
+      shape.Set(b2Vec2(-7.0f, 26.0f), b2Vec2(-15.0f, 23.0f));
       
-      shape.Set(b2Vec2(-6.0f, 26.0f), b2Vec2(-20.0f, 23.0f));
+      b2FixtureDef *fd = new b2FixtureDef;
+      fd->density = 1.f;
+      fd->shape = new b2EdgeShape;
+      fd->shape = &shape;
+      fd->friction=1.0f;
+
 	
       b2BodyDef bd;
       rightslant1 = m_world->CreateBody(&bd);
-      rightslant1->CreateFixture(&shape, 0.0f);
+      rightslant1->CreateFixture(fd);
   }
   
   //right slant 2
   {
       b2Body* rightslant2;
       
-      shape.Set(b2Vec2(-6.0f, 18.0f), b2Vec2(-20.0f,15.0f));
+      shape.Set(b2Vec2(-6.0f, 18.0f), b2Vec2(-15.0f,15.0f));
 	
       b2BodyDef bd;
       rightslant2 = m_world->CreateBody(&bd);
@@ -560,7 +566,7 @@ namespace cs296
  {
       b2Body* rightslant2;
     
-      shape.Set(b2Vec2(-6.0f, 10.0f), b2Vec2(-20.0f, 7.0f));
+      shape.Set(b2Vec2(-6.0f, 10.0f), b2Vec2(-15.0f, 7.0f));
 	
       b2BodyDef bd;
       rightslant2 = m_world->CreateBody(&bd);
@@ -572,7 +578,7 @@ namespace cs296
   {
       b2Body* leftslant1;
       
-      shape.Set(b2Vec2(-36.0f, 27.0f), b2Vec2(-20.0f, 21.0f));
+      shape.Set(b2Vec2(-25.0f, 25.0f), b2Vec2(-17.0f, 21.0f));
 	
       b2BodyDef bd;
       leftslant1 = m_world->CreateBody(&bd);
@@ -583,7 +589,7 @@ namespace cs296
   {
       b2Body* leftslant2;
       
-      shape.Set(b2Vec2(-36.0f, 19.0f), b2Vec2(-20.0f, 13.0f));
+      shape.Set(b2Vec2(-25.0f, 17.0f), b2Vec2(-17.0f, 13.0f));
 	
       b2BodyDef bd;
       leftslant2 = m_world->CreateBody(&bd);
@@ -595,7 +601,7 @@ namespace cs296
   {
       b2Body* leftslant3;
       
-      shape.Set(b2Vec2(-36.0f, 11.0f), b2Vec2(-20.0f, 5.0f));
+      shape.Set(b2Vec2(-25.0f, 9.0f), b2Vec2(-17.0f, 5.0f));
 	
       b2BodyDef bd;
       leftslant3 = m_world->CreateBody(&bd);
@@ -771,7 +777,7 @@ namespace cs296
 
 //create gear with a set of lines (facing problems)
 
-    {
+   /* {
 
 
       b2BodyDef *bd = new b2BodyDef;
@@ -797,10 +803,10 @@ namespace cs296
 
       }
   
-    }
+    }*/
 
 
-    //The start left
+    //The star left
     {
       b2PolygonShape shape;
       shape.SetAsBox(2.2f, 0.2f);
@@ -828,6 +834,92 @@ namespace cs296
   
       b2BodyDef bd3;
       bd3.position.Set(-2.3f, 10.67f);
+      b2Body* body3 = m_world->CreateBody(&bd3);
+      b2FixtureDef *fd3 = new b2FixtureDef;
+  
+
+      b2RevoluteJointDef jointDef;
+      jointDef.bodyA = body;
+      jointDef.bodyB = body3;
+      jointDef.localAnchorA.Set(0,0);
+      jointDef.localAnchorB.Set(0,0);
+      jointDef.collideConnected = false;
+      m_world->CreateJoint(&jointDef);
+    }
+
+//The star top
+    {
+      b2PolygonShape shape;
+      shape.SetAsBox(1.5f, 0.2f);
+  
+      b2BodyDef bd;
+      bd.position.Set(2.3f, 11.f);
+      bd.type = b2_dynamicBody;
+      b2Body* body = m_world->CreateBody(&bd);
+      b2FixtureDef *fd = new b2FixtureDef;
+      fd->density = 1.f;
+      fd->shape = new b2PolygonShape;
+      fd->shape = &shape;
+      body->CreateFixture(fd);
+
+
+      b2PolygonShape shape2;
+      shape2.SetAsBox(0.2f, 1.5f);
+       b2FixtureDef *fd2 = new b2FixtureDef;
+      fd2->density = 1.f;
+      fd2->shape = new b2PolygonShape;
+      fd2->shape = &shape2;
+      body->CreateFixture(fd2);
+
+
+  
+      b2BodyDef bd3;
+      bd3.position.Set(2.3f, 11.f);
+      b2Body* body3 = m_world->CreateBody(&bd3);
+      b2FixtureDef *fd3 = new b2FixtureDef;
+  
+
+      b2RevoluteJointDef jointDef;
+      jointDef.bodyA = body;
+      jointDef.bodyB = body3;
+      jointDef.localAnchorA.Set(0,0);
+      jointDef.localAnchorB.Set(0,0);
+      jointDef.collideConnected = false;
+      m_world->CreateJoint(&jointDef);
+
+
+    }
+
+
+
+//The star right
+    {
+      b2PolygonShape shape;
+      shape.SetAsBox(1.5f, 0.2f);
+  
+      b2BodyDef bd;
+      bd.position.Set(2.3f, 6.2f);
+      bd.type = b2_dynamicBody;
+      b2Body* body = m_world->CreateBody(&bd);
+      b2FixtureDef *fd = new b2FixtureDef;
+      fd->density = 1.f;
+      fd->shape = new b2PolygonShape;
+      fd->shape = &shape;
+      body->CreateFixture(fd);
+
+
+      b2PolygonShape shape2;
+      shape2.SetAsBox(0.2f, 1.5f);
+       b2FixtureDef *fd2 = new b2FixtureDef;
+      fd2->density = 1.f;
+      fd2->shape = new b2PolygonShape;
+      fd2->shape = &shape2;
+      body->CreateFixture(fd2);
+
+
+  
+      b2BodyDef bd3;
+      bd3.position.Set(2.3f, 6.2f);
       b2Body* body3 = m_world->CreateBody(&bd3);
       b2FixtureDef *fd3 = new b2FixtureDef;
   

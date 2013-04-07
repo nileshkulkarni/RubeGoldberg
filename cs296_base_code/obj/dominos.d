@@ -1,6 +1,6 @@
-/home/rj/dev/RubeGoldberg/cs296_base_code/obj/dominos.o: \
- /home/rj/dev/RubeGoldberg/cs296_base_code/src/dominos.cpp \
- /home/rj/dev/RubeGoldberg/cs296_base_code/src/cs296_base.hpp \
+/home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/obj/dominos.o: \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/src/dominos.cpp \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/src/cs296_base.hpp \
  /usr/include/GL/glui.h /usr/include/c++/4.7/cstdlib \
  /usr/include/c++/4.7/x86_64-linux-gnu/bits/c++config.h \
  /usr/include/c++/4.7/x86_64-linux-gnu/bits/os_defines.h \
@@ -22,10 +22,12 @@
  /usr/include/x86_64-linux-gnu/bits/select.h \
  /usr/include/x86_64-linux-gnu/bits/sigset.h \
  /usr/include/x86_64-linux-gnu/bits/time.h \
+ /usr/include/x86_64-linux-gnu/bits/select2.h \
  /usr/include/x86_64-linux-gnu/sys/sysmacros.h \
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h /usr/include/alloca.h \
- /usr/include/GL/glut.h /usr/include/GL/freeglut_std.h \
- /usr/include/GL/gl.h /usr/include/GL/glext.h /usr/include/inttypes.h \
+ /usr/include/x86_64-linux-gnu/bits/stdlib.h /usr/include/GL/glut.h \
+ /usr/include/GL/freeglut_std.h /usr/include/GL/gl.h \
+ /usr/include/GL/glext.h /usr/include/inttypes.h \
  /usr/lib/gcc/x86_64-linux-gnu/4.7/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h /usr/include/GL/glu.h \
  /usr/include/c++/4.7/cstdio /usr/include/stdio.h /usr/include/libio.h \
@@ -33,7 +35,9 @@
  /usr/lib/gcc/x86_64-linux-gnu/4.7/include/stdarg.h \
  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
  /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
- /usr/include/c++/4.7/cstring /usr/include/string.h \
+ /usr/include/x86_64-linux-gnu/bits/stdio.h \
+ /usr/include/x86_64-linux-gnu/bits/stdio2.h /usr/include/c++/4.7/cstring \
+ /usr/include/string.h /usr/include/x86_64-linux-gnu/bits/string3.h \
  /usr/include/c++/4.7/string /usr/include/c++/4.7/bits/stringfwd.h \
  /usr/include/c++/4.7/bits/char_traits.h \
  /usr/include/c++/4.7/bits/stl_algobase.h \
@@ -49,8 +53,8 @@
  /usr/include/c++/4.7/bits/stl_iterator_base_funcs.h \
  /usr/include/c++/4.7/bits/stl_iterator.h \
  /usr/include/c++/4.7/debug/debug.h /usr/include/c++/4.7/bits/postypes.h \
- /usr/include/c++/4.7/cwchar /usr/include/c++/4.7/cstdint \
- /usr/include/c++/4.7/bits/allocator.h \
+ /usr/include/c++/4.7/cwchar /usr/include/x86_64-linux-gnu/bits/wchar2.h \
+ /usr/include/c++/4.7/cstdint /usr/include/c++/4.7/bits/allocator.h \
  /usr/include/c++/4.7/x86_64-linux-gnu/bits/c++allocator.h \
  /usr/include/c++/4.7/ext/new_allocator.h /usr/include/c++/4.7/new \
  /usr/include/c++/4.7/exception \
@@ -108,9 +112,9 @@
  /usr/include/c++/4.7/bits/basic_ios.tcc \
  /usr/include/c++/4.7/bits/ostream.tcc /usr/include/c++/4.7/istream \
  /usr/include/c++/4.7/bits/istream.tcc \
- /home/rj/dev/RubeGoldberg/cs296_base_code/src/render.hpp \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Box2D.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Common/b2Settings.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/src/render.hpp \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Box2D.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Common/b2Settings.h \
  /usr/include/c++/4.7/cassert /usr/include/assert.h \
  /usr/include/c++/4.7/cmath /usr/include/math.h \
  /usr/include/x86_64-linux-gnu/bits/huge_val.h \
@@ -120,17 +124,18 @@
  /usr/include/x86_64-linux-gnu/bits/nan.h \
  /usr/include/x86_64-linux-gnu/bits/mathdef.h \
  /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Common/b2Draw.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Common/b2Math.h \
+ /usr/include/x86_64-linux-gnu/bits/mathinline.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Common/b2Draw.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Common/b2Math.h \
  /usr/include/c++/4.7/cfloat \
  /usr/lib/gcc/x86_64-linux-gnu/4.7/include/float.h \
  /usr/include/c++/4.7/cstddef /usr/include/c++/4.7/limits \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Common/b2Timer.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Common/b2Timer.h \
  /usr/include/x86_64-linux-gnu/sys/time.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Collision/Shapes/b2CircleShape.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Collision/Shapes/b2Shape.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Common/b2BlockAllocator.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Collision/b2Collision.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Collision/Shapes/b2CircleShape.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Collision/Shapes/b2Shape.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Common/b2BlockAllocator.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Collision/b2Collision.h \
  /usr/include/c++/4.7/climits \
  /usr/lib/gcc/x86_64-linux-gnu/4.7/include-fixed/limits.h \
  /usr/lib/gcc/x86_64-linux-gnu/4.7/include-fixed/syslimits.h \
@@ -139,12 +144,12 @@
  /usr/include/linux/limits.h \
  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
  /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Collision/Shapes/b2EdgeShape.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Collision/Shapes/b2ChainShape.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Collision/Shapes/b2PolygonShape.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Collision/b2BroadPhase.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Collision/b2DynamicTree.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Common/b2GrowableStack.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Collision/Shapes/b2EdgeShape.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Collision/Shapes/b2ChainShape.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Collision/Shapes/b2PolygonShape.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Collision/b2BroadPhase.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Collision/b2DynamicTree.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Common/b2GrowableStack.h \
  /usr/include/c++/4.7/algorithm /usr/include/c++/4.7/utility \
  /usr/include/c++/4.7/bits/stl_relops.h \
  /usr/include/c++/4.7/bits/stl_algo.h \
@@ -155,9 +160,9 @@
  /usr/include/c++/4.7/numeric /usr/include/c++/4.7/bits/stl_numeric.h \
  /usr/include/c++/4.7/functional /usr/include/c++/4.7/typeinfo \
  /usr/include/c++/4.7/tuple /usr/include/c++/4.7/bits/uses_allocator.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Collision/b2Distance.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Collision/b2TimeOfImpact.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/b2Body.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Collision/b2Distance.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Collision/b2TimeOfImpact.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/b2Body.h \
  /usr/include/c++/4.7/memory \
  /usr/include/c++/4.7/bits/stl_raw_storage_iter.h \
  /usr/include/c++/4.7/ext/concurrence.h \
@@ -165,28 +170,29 @@
  /usr/include/c++/4.7/bits/unique_ptr.h \
  /usr/include/c++/4.7/bits/shared_ptr.h \
  /usr/include/c++/4.7/bits/shared_ptr_base.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/b2Fixture.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/b2WorldCallbacks.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/b2TimeStep.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/b2World.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Common/b2StackAllocator.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/b2ContactManager.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/Contacts/b2Contact.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/Joints/b2DistanceJoint.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/Joints/b2Joint.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/Joints/b2FrictionJoint.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/Joints/b2GearJoint.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/Joints/b2WheelJoint.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/Joints/b2MouseJoint.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/Joints/b2PrismaticJoint.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/Joints/b2PulleyJoint.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/Joints/b2RevoluteJoint.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/Joints/b2RopeJoint.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/Joints/b2WeldJoint.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/b2Fixture.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/b2WorldCallbacks.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/b2TimeStep.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/b2World.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Common/b2StackAllocator.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/b2ContactManager.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/Contacts/b2Contact.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/Joints/b2DistanceJoint.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/Joints/b2Joint.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/Joints/b2FrictionJoint.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/Joints/b2GearJoint.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/Joints/b2WheelJoint.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/Joints/b2MouseJoint.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/Joints/b2PrismaticJoint.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/Joints/b2PulleyJoint.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/Joints/b2RevoluteJoint.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/Joints/b2RopeJoint.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/external/include/Box2D/Dynamics/Joints/b2WeldJoint.h \
  /usr/include/unistd.h /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
  /usr/include/x86_64-linux-gnu/bits/environments.h \
  /usr/include/x86_64-linux-gnu/bits/confname.h /usr/include/getopt.h \
- /usr/include/c++/4.7/thread /usr/include/c++/4.7/chrono \
- /usr/include/c++/4.7/ratio /usr/include/c++/4.7/ctime \
- /usr/include/GL/freeglut.h /usr/include/GL/freeglut_ext.h \
- /home/rj/dev/RubeGoldberg/cs296_base_code/src/dominos.hpp
+ /usr/include/x86_64-linux-gnu/bits/unistd.h /usr/include/c++/4.7/thread \
+ /usr/include/c++/4.7/chrono /usr/include/c++/4.7/ratio \
+ /usr/include/c++/4.7/ctime /usr/include/GL/freeglut.h \
+ /usr/include/GL/freeglut_ext.h \
+ /home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code/src/dominos.hpp

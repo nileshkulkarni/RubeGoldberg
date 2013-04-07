@@ -15,7 +15,7 @@ DOXYGEN = doxygen
 TARGET = cs296_base
 
 # Project Paths
-PROJECT_ROOT=/home/rj/dev/RubeGoldberg/cs296_base_code
+PROJECT_ROOT=/home/avinash/CS_296_Project/dev/RubeGoldberg/cs296_base_code
 EXTERNAL_ROOT=$(PROJECT_ROOT)/external
 SRCDIR = $(PROJECT_ROOT)/src
 OBJDIR = $(PROJECT_ROOT)/obj
@@ -28,12 +28,12 @@ GLUI_ROOT=/usr
 GL_ROOT=/usr
 
 #Libraries
-LIBS = -lBox2D -lglui -lglut -lGLU -lGL
+LIBS = -lBox2D -lglui -lglut -lGLU -lGL -pg
 
 # Compiler and Linker flags
-CPPFLAGS =-g -Wall -std=c++0x -pthread
-CPPFLAGS+=-I $(BOX2D_ROOT)/include -I $(GLUI_ROOT)/include
-LDFLAGS+=-L $(BOX2D_ROOT)/lib -L $(GLUI_ROOT)/lib 
+CPPFLAGS =-g -Wall -std=c++0x -pthread -O2 -O3
+CPPFLAGS+=-I $(BOX2D_ROOT)/include -I $(GLUI_ROOT)/include -pg				
+LDFLAGS+=-L $(BOX2D_ROOT)/lib -L $(GLUI_ROOT)/lib -pg
 
 ######################################
 
