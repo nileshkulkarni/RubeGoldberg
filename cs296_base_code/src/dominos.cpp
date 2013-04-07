@@ -120,11 +120,11 @@ namespace cs296
       ballfd.friction = 0.0f;
       ballfd.restitution = 0.0f;
 	
-      for (int i = 0; i < 9; ++i)
+      for (int i = 0; i <4; ++i)
     	{
     	  b2BodyDef ballbd;
     	  ballbd.type = b2_dynamicBody;
-    	  ballbd.position.Set(21.5f + i*1.0, 31.25f);
+    	  ballbd.position.Set(27.5f + i*1.0, 31.25f);
     	  spherebody = m_world->CreateBody(&ballbd);
     	  spherebody->CreateFixture(&ballfd);
     	}
@@ -669,7 +669,7 @@ namespace cs296
 
       //The bar attached to pulley
       bd->position.Set(shiftX+7,shiftY-1);	
-      fd1->density = 43.0;	  //Can set this
+      fd1->density = 40.0;	  //Can set this
       b2Body* box2 = m_world->CreateBody(bd);
       box2->CreateFixture(fd1);
 
