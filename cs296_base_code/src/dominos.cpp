@@ -855,6 +855,67 @@ namespace cs296
 
 
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    //Star top
+    //The star top
+    {
+      b2PolygonShape shape;
+      shape.SetAsBox(1.5f, 0.2f);
+  
+      b2BodyDef bd;
+      bd.position.Set(1.0f, 7.5f);
+      bd.type = b2_dynamicBody;
+      b2Body* body = m_world->CreateBody(&bd);
+      b2FixtureDef *fd = new b2FixtureDef;
+      fd->density = 1.f;
+      fd->shape = new b2PolygonShape;
+      fd->shape = &shape;
+      body->CreateFixture(fd);
+
+
+      b2PolygonShape shape2;
+      shape2.SetAsBox(0.2f, 1.5f);//,b2Vec2(1.0f, 7.5f),0);
+       b2FixtureDef *fd2 = new b2FixtureDef;
+      fd2->density = 1.f;
+      fd2->shape = new b2PolygonShape;
+      fd2->shape = &shape2;
+      body->CreateFixture(fd2);
+      
+  
+      b2BodyDef bd3;
+      bd3.position.Set(1.0f, 7.5f);
+      b2Body* body3 = m_world->CreateBody(&bd3);
+      b2FixtureDef *fd3 = new b2FixtureDef;
+  
+
+      b2RevoluteJointDef jointDef;
+      jointDef.bodyA = body;
+      jointDef.bodyB = body3;
+      jointDef.localAnchorA.Set(0,0);
+      jointDef.localAnchorB.Set(0,0);
+      jointDef.collideConnected = false;
+     
+	jointDef.enableMotor = true;
+	jointDef.motorSpeed = 2;
+	jointDef.maxMotorTorque = 1;
+      m_world->CreateJoint(&jointDef);
+
+
+    }
+    
+    
+    
+    
+    
+    
+    
 
 
 /*
