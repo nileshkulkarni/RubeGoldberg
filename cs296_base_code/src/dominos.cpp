@@ -155,7 +155,7 @@ namespace cs296
       b2BodyDef bd3;
       bd3.position.Set(19.5f-i*2, 37.75f);
       b2Body* body3 = m_world->CreateBody(&bd3);
-      b2FixtureDef *fd3 = new b2FixtureDef;
+      //b2FixtureDef *fd3 = new b2FixtureDef;
   
 
       b2RevoluteJointDef jointDef;
@@ -553,7 +553,8 @@ namespace cs296
 	
 	
 	
-	}		Ball *b= new Ball(m_world,38,1,42,1);
+	}		
+	Ball *b= new Ball(m_world,38,1,42,1);
 	
 //bar below dominos to which the ball will collide and produce sound
 
@@ -827,7 +828,7 @@ namespace cs296
       b2BodyDef bd3;
       bd3.position.Set(-3.3f, 10.67f);
       b2Body* body3 = m_world->CreateBody(&bd3);
-      b2FixtureDef *fd3 = new b2FixtureDef;
+      //b2FixtureDef *fd3 = new b2FixtureDef;
   
 
       b2RevoluteJointDef jointDef;
@@ -868,7 +869,7 @@ namespace cs296
       b2BodyDef bd3;
       bd3.position.Set(1.0f, 10.2f);
       b2Body* body3 = m_world->CreateBody(&bd3);
-      b2FixtureDef *fd3 = new b2FixtureDef;
+      //b2FixtureDef *fd3 = new b2FixtureDef;
   
 
       b2RevoluteJointDef jointDef;
@@ -914,7 +915,7 @@ namespace cs296
       b2BodyDef bd3;
       bd3.position.Set(3.7f, 8.2f);
       b2Body* body3 = m_world->CreateBody(&bd3);
-      b2FixtureDef *fd3 = new b2FixtureDef;
+      //b2FixtureDef *fd3 = new b2FixtureDef;
   
 
       b2RevoluteJointDef jointDef;
@@ -959,7 +960,7 @@ namespace cs296
       b2BodyDef bd3;
       bd3.position.Set(3.2f, 5.2f);
       b2Body* body3 = m_world->CreateBody(&bd3);
-      b2FixtureDef *fd3 = new b2FixtureDef;
+      //b2FixtureDef *fd3 = new b2FixtureDef;
   
 
       b2RevoluteJointDef jointDef;

@@ -21,7 +21,7 @@
    %citecolor={dark-blue}, urlcolor={medium-blue}
 %  }
 %\usepackage{hypersetup}
-\usepackage[top=0.5in, bottom=0.5in, left=0.25in, right=0.25in]{geometry} 
+\usepackage[top=1.5in, bottom=1.5in, left=0.5in, right=0.5in]{geometry} 
 \begin{document}
 
 \title{ A CS296-28 GROUP REPORT }
@@ -44,12 +44,41 @@
 \tableofcontents	
 \newpage
 \pagenumbering{arabic}
+
 \section{Interesting things about our design}
-Our design acts a bit like an "Alarm" with only one snooze step. When the ball which is placed below the pendulum, comes and hits the alarm trigger which enables the alarm.\\
-Again after some time we can see that when all the balls fall into the box which is on one-side of the pendulum, the rod rises up and hits the other alarm trigger wh   
+The main purpose of our design was to do some easy task with a lot of complexity involved in it. The design accomplishes a task of ringing a bell by putting a ball into a container through a series of steps. We have employed used of multithreading in c++ to play the music. Also we have a gear like system in the design to help the process. We can also see many different features like dominos, pulley systems, and hanging bells which produce sweet sound.
+\section{Main Machine Components}
+	\begin{itemize}
+		\item Pulley Sytems
+		\item Single Point Fixed Rotating bars
+		\item Pendulm
+		\item Ball
+		\item Chiming Bells Hanging
+		\item Dominos
+		\item Motor
+		\item Lever
+		\item Blocking Rod
+		\item Rotating Gears
+	\end{itemize}
+ 	\begin{figure}[ht]
+	\includegraphics[height=100mm]{machine.eps}
+	\caption{RubeGoldberg Machine}	
+	\label{fig:ResourceIntensivePlot01}
+	\end{figure}
+
+
 \section{Difference between the original and finished design}
+We have moslty follwed the design we proposed but with a minor change that we are going to ring a bell instead of liting a bulb as shown in the design. And most of the design has been followed strictly with extra additions to it and nothing deleted from it. Feature extension of sounds on certain collisions has been added.
+
+
+
+\section{Brief Overview of the Code}
+	Most of the code editing pertaining to showing objects and adding them to display is done in the "dominos.cpp" file. Secondly there has been use of multithreading in the project to add sound to the simulation. These form the important parts of the project, ofcourse not forgetting to mention the Box2D library and the certain parts of the code orignally belonging to base.
+	We have written our cutsom class(inherited it from b2ContactSolver) for getting feedback on collision and whose callback function helps us in some actions. 
+	The files which include editing from our side are dominos.cpp, cs296\_base.hpp, cs296\_base.cpp. Also we are using mpg123 to play the .mp3 files.
 
 \section{Analysis of the code}
+Code analysis using Gprof Matplotlib and GunPlot
 \subsection{Plot01 : Step-time Vs Iterative Values}
  	\begin{figure}[ht]
 	\begin{minipage}[ht]{0.5\linewidth}
@@ -216,8 +245,15 @@ b2Vec2::b2vec(float x ,float y)
 }
 \end{verbatim}
 We can make  this function inline and reduce the overhead
+	
+	\item For gdb to support inlined functions, the compiler must record information about in-lining in the debug information. So in debug version inline (definition is excluded.
 
-\item For gdb to support inlined functions, the compiler must record information about in-lining in the debug information. So in debug version inline (definition is excluded.
-\end{itemize}
+	\end{itemize}
+
+\section{Conclusion}
+	We are very thankful to our instructor Prof Parag Chaudhari for giving us a wonderful opportunity to work on such a project and design our own RubeGoldberg machine.
+	We are also very thankful to our TA's for constantly helping us in labs.
 
 \end{document}
+
+
