@@ -140,3 +140,29 @@ clean:
 
 distclean: clean
 	@$(RM) -rf $(BINDIR) $(DOCDIR)/html
+plot01: setup
+	@rm -rf data/temp.csv
+	@chmod 755 scripts/*.sh
+	@./scripts/gen_data.sh
+	@./scripts/gen_csv.sh
+	@./scripts/temp.sh
+	@gnuplot> load 'scripts/g28_plot01.gpt'
+	@gnuplot> load 'scripts/g28_plot02.gpt'
+	@gnuplot> load 'scripts/g28_plot03.gpt'
+	@gnuplot> load 'scripts/g28_plot04.gpt'
+	@gnuplot> load 'scripts/g28_plot05.gpt'
+	@gnuplot> load 'scripts/g28_plot06.gpt'
+	@rm -rf *.dat data/lab05_g28_data_temp.csv load 
+
+plot02: setup
+	@rm -rf data/temp.csv
+	@chmod 755 scripts/*.sh
+	@./scripts/gen_data_csv.sh
+	@./scripts/temp.sh
+	@gnuplot> load 'scripts/g28_plot01.gpt'
+	@gnuplot> load 'scripts/g28_plot02.gpt'
+	@gnuplot> load 'scripts/g28_plot03.gpt'
+	@gnuplot> load 'scripts/g28_plot04.gpt'
+	@gnuplot> load 'scripts/g28_plot05.gpt'
+	@gnuplot> load 'scripts/g28_plot06.gpt'
+	@rm -rf *.dat data/lab05_g28_data_temp.csv load

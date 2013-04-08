@@ -1,0 +1,18 @@
+set autoscale
+unset log
+unset label
+set title "g28_plot06"
+set term png
+set output "plots/g28_plot06.png"
+set xlabel "step time in ms"
+set ylabel "frequency"
+set datafile sep ","
+
+bin(x,s)=s*int(x/s)
+bwi = 0.0005 ;
+set boxwidth bwi*0.8
+set style fill solid 0.4
+set yrange [0:100]
+
+plot 'data/lab05_g28_data_temp.csv' u (bin($3,bwi)+bwi/2):(1.0) smooth frequency ti 'freq' with boxes, \
+	 'data/lab05_g28_data_temp.csv' u ($3):(1) smooth cumulative  ti 'cumulative' w lines
