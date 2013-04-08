@@ -1,0 +1,13 @@
+set autoscale
+unset log
+set xtic auto
+set ytic auto
+set title "g28_plot01"
+set xlabel "iteration values"
+set ylabel "time in ms"
+set term png
+set output "plots/g28_plot01.png"
+set datafile sep ","
+
+plot 'data/lab05_g28_data.csv' u 2:3 smooth unique w points title "step time", \
+	 'data/lab05_g28_data.csv' u 2:7 smooth unique w points title "loop time"

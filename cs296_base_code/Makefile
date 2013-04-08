@@ -129,14 +129,48 @@ release_prof:
 	@gprof bin/cs296_base gmon.out > releaseProfile/g28_release_prof.dat
 	@gprof bin/cs296_base | python gprof2dot.py | dot -Tpng -o releaseProfile/output.png
 
-report:
-	@make -C $(DOCDIR)
+report: all
+	@echo "Generating report"
+	@mkdir -p data
+	@mkdir -p plots
+	@python3 scripts/g28_gen_csv.py
+	@python3 scripts/g28_gen_plots.py
+	@python3 scripts/convertImages.py
+	@make -C $(DOCDIR)	
+	@python3 scripts/g28_gen_html.py
 
 
 clean:
 	@$(ECHO) -n "Cleaning up..."
 	@$(RM) -rf $(OBJDIR) *~ $(DEPS) $(SRCDIR)/*~ $(BINDIR)
+	@$(RM) -rf data plots
 	@$(ECHO) "Done"
 
 distclean: clean
 	@$(RM) -rf $(BINDIR) $(DOCDIR)/html
+plot01: setup
+	@rm -rf data/temp.csv
+	@chmod 755 scripts/*.sh
+	@./scripts/gen_data.sh
+	@./scripts/gen_csv.sh
+	@./scripts/temp.sh
+	@gnuplot> load 'scripts/g28_plot01.gpt'
+	@gnuplot> load 'scripts/g28_plot02.gpt'
+	@gnuplot> load 'scripts/g28_plot03.gpt'
+	@gnuplot> load 'scripts/g28_plot04.gpt'
+	@gnuplot> load 'scripts/g28_plot05.gpt'
+	@gnuplot> load 'scripts/g28_plot06.gpt'
+	@rm -rf *.dat data/lab05_g28_data_temp.csv load 
+
+plot02: setup
+	@rm -rf data/temp.csv
+	@chmod 755 scripts/*.sh
+	@./scripts/gen_data_csv.sh
+	@./scripts/temp.sh
+	@gnuplot> load 'scripts/g28_plot01.gpt'
+	@gnuplot> load 'scripts/g28_plot02.gpt'
+	@gnuplot> load 'scripts/g28_plot03.gpt'
+	@gnuplot> load 'scripts/g28_plot04.gpt'
+	@gnuplot> load 'scripts/g28_plot05.gpt'
+	@gnuplot> load 'scripts/g28_plot06.gpt'
+	@rm -rf *.dat data/lab05_g28_data_temp.csv load
