@@ -129,6 +129,44 @@ namespace cs296
     	  spherebody->CreateFixture(&ballfd);
     	}
     }
+    
+    
+    
+    //hangings at top
+    
+    //The hanging
+    {
+    
+    for (int i=0;i<4;i++)
+    {
+      b2PolygonShape shape;
+      shape.SetAsBox(0.2f, 3.5);
+  
+      b2BodyDef bd;
+      bd.position.Set(19.5f-i*2, 34.25f);
+      bd.type = b2_dynamicBody;
+      b2Body* body = m_world->CreateBody(&bd);
+      b2FixtureDef *fd = new b2FixtureDef;
+      fd->density = 0.2f;
+      fd->shape = new b2PolygonShape;
+      fd->shape = &shape;
+      body->CreateFixture(fd);
+
+      b2BodyDef bd3;
+      bd3.position.Set(19.5f-i*2, 37.75f);
+      b2Body* body3 = m_world->CreateBody(&bd3);
+      b2FixtureDef *fd3 = new b2FixtureDef;
+  
+
+      b2RevoluteJointDef jointDef;
+      jointDef.bodyA = body;
+      jointDef.bodyB = body3;
+      jointDef.localAnchorA.Set(0,3.5);
+      jointDef.localAnchorB.Set(0,0);
+      jointDef.collideConnected = false;
+      m_world->CreateJoint(&jointDef);
+      }
+    }
 
     //The pulley system (near pendulum)
     {
@@ -373,9 +411,6 @@ namespace cs296
 
 
 
-
-
-
  // the left slant shelf shelf beside the shelf having first set of dominos
 {
       b2PolygonShape horizshape;
@@ -521,15 +556,8 @@ namespace cs296
 	
 	
 	}		Ball *b= new Ball(m_world,38,1,42,1);
+	
 //bar below dominos to which the ball will collide and produce sound
-/*{
-	b2EdgeShape shape;
-	shape.Set(b2Vec2(36.0f,8.0f),b2Vec2(43.0f,8.0f));
-
-	b2BodyDef bd;
-	b1 = m_world->CreateBody(&bd);
-	b1->CreateFixture(&shape,0.0f);
-}*/
 
 
 
@@ -778,7 +806,7 @@ namespace cs296
       shape.SetAsBox(2.2f, 0.2f);
   
       b2BodyDef bd;
-      bd.position.Set(-2.3f, 10.67f);
+      bd.position.Set(-3.3f, 10.67f);
       bd.type = b2_dynamicBody;
       b2Body* body = m_world->CreateBody(&bd);
       b2FixtureDef *fd = new b2FixtureDef;
@@ -799,7 +827,7 @@ namespace cs296
 
   
       b2BodyDef bd3;
-      bd3.position.Set(-2.3f, 10.67f);
+      bd3.position.Set(-3.3f, 10.67f);
       b2Body* body3 = m_world->CreateBody(&bd3);
       b2FixtureDef *fd3 = new b2FixtureDef;
   
@@ -819,7 +847,7 @@ namespace cs296
       shape.SetAsBox(1.5f, 0.2f);
   
       b2BodyDef bd;
-      bd.position.Set(1.0f, 11.2f);
+      bd.position.Set(1.0f, 10.2f);
       bd.type = b2_dynamicBody;
       b2Body* body = m_world->CreateBody(&bd);
       b2FixtureDef *fd = new b2FixtureDef;
@@ -840,7 +868,98 @@ namespace cs296
 
   
       b2BodyDef bd3;
-      bd3.position.Set(1.0f, 11.2f);
+      bd3.position.Set(1.0f, 10.2f);
+      b2Body* body3 = m_world->CreateBody(&bd3);
+      b2FixtureDef *fd3 = new b2FixtureDef;
+  
+
+      b2RevoluteJointDef jointDef;
+      jointDef.bodyA = body;
+      jointDef.bodyB = body3;
+      jointDef.localAnchorA.Set(0,0);
+      jointDef.localAnchorB.Set(0,0);
+      jointDef.collideConnected = false;
+      m_world->CreateJoint(&jointDef);
+
+
+    }
+    
+    
+    
+    
+    //The star right
+    {
+      b2PolygonShape shape;
+      shape.SetAsBox(1.5f, 0.2f);
+  
+      b2BodyDef bd;
+      bd.position.Set(3.7f, 8.2f);
+      bd.type = b2_dynamicBody;
+      b2Body* body = m_world->CreateBody(&bd);
+      b2FixtureDef *fd = new b2FixtureDef;
+      fd->density = 1.f;
+      fd->shape = new b2PolygonShape;
+      fd->shape = &shape;
+      body->CreateFixture(fd);
+
+
+      b2PolygonShape shape2;
+      shape2.SetAsBox(0.2f, 1.5f);
+       b2FixtureDef *fd2 = new b2FixtureDef;
+      fd2->density = 1.f;
+      fd2->shape = new b2PolygonShape;
+      fd2->shape = &shape2;
+      body->CreateFixture(fd2);
+
+
+  
+      b2BodyDef bd3;
+      bd3.position.Set(3.7f, 8.2f);
+      b2Body* body3 = m_world->CreateBody(&bd3);
+      b2FixtureDef *fd3 = new b2FixtureDef;
+  
+
+      b2RevoluteJointDef jointDef;
+      jointDef.bodyA = body;
+      jointDef.bodyB = body3;
+      jointDef.localAnchorA.Set(0,0);
+      jointDef.localAnchorB.Set(0,0);
+      jointDef.collideConnected = false;
+      m_world->CreateJoint(&jointDef);
+
+
+    }
+    
+    
+    
+    //The star below
+    {
+      b2PolygonShape shape;
+      shape.SetAsBox(1.5f, 0.2f);
+  
+      b2BodyDef bd;
+      bd.position.Set(3.2f, 5.2f);
+      bd.type = b2_dynamicBody;
+      b2Body* body = m_world->CreateBody(&bd);
+      b2FixtureDef *fd = new b2FixtureDef;
+      fd->density = 1.f;
+      fd->shape = new b2PolygonShape;
+      fd->shape = &shape;
+      body->CreateFixture(fd);
+
+
+      b2PolygonShape shape2;
+      shape2.SetAsBox(0.2f, 1.5f);
+       b2FixtureDef *fd2 = new b2FixtureDef;
+      fd2->density = 1.f;
+      fd2->shape = new b2PolygonShape;
+      fd2->shape = &shape2;
+      body->CreateFixture(fd2);
+
+
+  
+      b2BodyDef bd3;
+      bd3.position.Set(3.2f, 5.2f);
       b2Body* body3 = m_world->CreateBody(&bd3);
       b2FixtureDef *fd3 = new b2FixtureDef;
   
@@ -863,8 +982,8 @@ namespace cs296
     
     
     
-    //Star top
-    //The star top
+    
+    //The star middle
     {
       b2PolygonShape shape;
       shape.SetAsBox(1.5f, 0.2f);
@@ -881,18 +1000,36 @@ namespace cs296
 
 
       b2PolygonShape shape2;
-      shape2.SetAsBox(0.2f, 1.5f);//,b2Vec2(1.0f, 7.5f),0);
+      shape2.SetAsBox(0.2f, 1.5f,b2Vec2(0, 0),pi/2.0);
        b2FixtureDef *fd2 = new b2FixtureDef;
       fd2->density = 1.f;
       fd2->shape = new b2PolygonShape;
       fd2->shape = &shape2;
       body->CreateFixture(fd2);
       
+      
+      
+     /* b2PolygonShape shape3;
+      shape3.SetAsBox(0.2f, 1.5f,b2Vec2(0, 0),-pi/6.0);
+       b2FixtureDef *fd3 = new b2FixtureDef;
+      fd3->density = 1.f;
+      fd3->shape = new b2PolygonShape;
+      fd3->shape = &shape3;
+      body->CreateFixture(fd3);
+      
+      b2PolygonShape shape4;
+      shape4.SetAsBox(0.2f, 1.5f,b2Vec2(0, 0),-pi/6.0);
+       b2FixtureDef *fd4 = new b2FixtureDef;
+      fd4->density = 1.f;
+      fd4->shape = new b2PolygonShape;
+      fd4->shape = &shape4;
+      body->CreateFixture(fd4);*/
+      
   
       b2BodyDef bd3;
       bd3.position.Set(1.0f, 7.5f);
       b2Body* body3 = m_world->CreateBody(&bd3);
-      b2FixtureDef *fd3 = new b2FixtureDef;
+    //  b2FixtureDef *fd3 = new b2FixtureDef;
   
 
       b2RevoluteJointDef jointDef;
@@ -903,8 +1040,8 @@ namespace cs296
       jointDef.collideConnected = false;
      
 	jointDef.enableMotor = true;
-	jointDef.motorSpeed = 2;
-	jointDef.maxMotorTorque = 1;
+	jointDef.motorSpeed = 2*pi;
+	jointDef.maxMotorTorque = 5;
       m_world->CreateJoint(&jointDef);
 
 
