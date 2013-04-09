@@ -29,12 +29,12 @@ GLUI_ROOT=/usr
 GL_ROOT=/usr
 
 #Libraries
-LIBS = -lBox2D -lglui -lglut -lGLU -lGL -pg
+LIBS = -lBox2D -lglui -lglut -lGLU -lGL 
 
 # Compiler and Linker flags
-CPPFLAGS =-g -Wall -std=c++0x -pthread -O2 -O3
-CPPFLAGS+=-I $(BOX2D_ROOT)/include -I $(GLUI_ROOT)/include -pg				
-LDFLAGS+=-L $(BOX2D_ROOT)/lib -L $(GLUI_ROOT)/lib -pg
+CPPFLAGS =-g -Wall -std=c++0x -pthread -O2 -O3 -pg
+CPPFLAGS+=-I $(BOX2D_ROOT)/include -I $(GLUI_ROOT)/include 			
+LDFLAGS+=-L $(BOX2D_ROOT)/lib -L $(GLUI_ROOT)/lib -pg 
 
 ######################################
 
@@ -101,7 +101,7 @@ doc:
 report: all
 	@echo "Generating report"
 	@make -C $(DOCDIR)	
-	@python3 scripts/g28_gen_html.py
+#	@python3 scripts/g28_gen_html.py
 
 #source files Box2d tar, src , documentation,Makefile, scripts
 dist: 
