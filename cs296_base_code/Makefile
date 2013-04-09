@@ -15,7 +15,8 @@ DOXYGEN = doxygen
 TARGET = cs296_base
 
 # Project Paths
-PROJECT_ROOT=/home/nilesh/dev/RubeGoldberg/cs296_base_code
+PROJECT_ROOT := ${CURDIR}
+#PROJECT_ROOT=/home/nilesh/dev/RubeGoldberg/cs296_base_code
 EXTERNAL_ROOT=$(PROJECT_ROOT)/external
 SRCDIR = $(PROJECT_ROOT)/src
 OBJDIR = $(PROJECT_ROOT)/obj
@@ -57,7 +58,7 @@ INCS := $(wildcard $(SRCDIR)/*.hpp)
 OBJS := $(SRCS:$(SRCDIR)/%.cpp=$(OBJDIR)/%.o)
 
 
-.PHONY: all setup doc clean distclean
+.PHONY: all setup doc clean distclean dist install
 
 all: setup $(BINDIR)/$(TARGET)
 
@@ -97,49 +98,28 @@ doc:
 	@$(ECHO) "Done"
 
 
-debug_prof:
+report: all
+	@echo "Generating report"
+	@make -C $(DOCDIR)	
+	@python3 scripts/g28_gen_html.py
+
+#source files Box2d tar, src , documentation,Makefile, scripts
+dist: 
+	@sh scripts/tarProject.sh
+
+install:
 	@mkdir -p debugProfile
 	@rm -rf $(EXTERNAL_ROOT)/src/Box2D
 	@rm -rf $(EXTERNAL_ROOT)/src/include/*
 	@rm -rf $(EXTERNAL_ROOT)/src/lib/*
 	@tar -xzf $(EXTERNAL_ROOT)/src/Box2D.tgz -C $(EXTERNAL_ROOT)/src
 	@mkdir $(EXTERNAL_ROOT)/src/Box2D/build296
-	@cd $(EXTERNAL_ROOT)/src/Box2D/build296;cmake -DCMAKE_BUILD_TYPE=Debug ../
+	@cd $(EXTERNAL_ROOT)/src/Box2D/build296;cmake ../ 
 	@make -C $(EXTERNAL_ROOT)/src/Box2D/build296
 	@make -C $(EXTERNAL_ROOT)/src/Box2D/build296 install
 	@make clean
 	@make 
-	@./bin/cs296_base 10000
-	@gprof bin/cs296_base gmon.out > debugProfile/g28_debug_prof.dat
-	@gprof bin/cs296_base | python gprof2dot.py | dot -Tpng -o debugProfile/output.png
-
-release_prof: 
-	@mkdir -p releaseProfile
-	@rm -rf $(EXTERNAL_ROOT)/src/Box2D
-	@rm -rf $(EXTERNAL_ROOT)/src/include/*
-	@rm -rf $(EXTERNAL_ROOT)/src/lib/*
-	@tar -xvf $(EXTERNAL_ROOT)/src/Box2D.tgz -C $(EXTERNAL_ROOT)/src
-	@mkdir $(EXTERNAL_ROOT)/src/Box2D/build296
-	@cd $(EXTERNAL_ROOT)/src/Box2D/build296;cmake -DCMAKE_BUILD_TYPE=Debug ../
-	@make -C $(EXTERNAL_ROOT)/src/Box2D/build296
-	@make -C $(EXTERNAL_ROOT)/src/Box2D/build296 install
-	@make clean
-	@make "CFLAGS= -O2 -O3"
-	@./bin/cs296_base 10000
-	@gprof bin/cs296_base gmon.out > releaseProfile/g28_release_prof.dat
-	@gprof bin/cs296_base | python gprof2dot.py | dot -Tpng -o releaseProfile/output.png
-
-report: all
-	@echo "Generating report"
-	@mkdir -p data
-	@mkdir -p plots
-	@python3 scripts/g28_gen_csv.py
-	@python3 scripts/g28_gen_plots.py
-	@python3 scripts/convertImages.py
-	@make -C $(DOCDIR)	
-	@python3 scripts/g28_gen_html.py
-
-
+		
 clean:
 	@$(ECHO) -n "Cleaning up..."
 	@$(RM) -rf $(OBJDIR) *~ $(DEPS) $(SRCDIR)/*~ $(BINDIR)
