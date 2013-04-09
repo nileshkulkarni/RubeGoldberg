@@ -123,6 +123,44 @@ int main(int argc, char** argv)
 
   //! Enter the infinite GLUT event loop
   glutMainLoop();
+ /*
+ int no_itr = atoi(argv[1]);
+  float tot_time = 0.0f;
+  float tot_col_time = 0.0f;
+  float tot_pos_time = 0.0f;
+  float tot_vel_time = 0.0f;
+  float tot_loop_time = 0.0f;
+  struct timeval t_start, t_end;
+
+  
+  float32 time_step = 1.0f / settings_hz;
+
+  gettimeofday(&t_start, NULL);
+  for (int i = 0; i < no_itr; i++){
+    b2World* world = test->get_world();
+    b2Profile profile = world->GetProfile();
+
+    world->Step(time_step, settings.velocity_iterations, settings.position_iterations);
+
+    //To print out | tc of the units
+    tot_time += profile.step;
+    tot_col_time += profile.collide;
+    tot_pos_time += profile.solvePosition;
+    tot_vel_time += profile.solveVelocity;
+  }
+  gettimeofday(&t_end, NULL);
+
+  //1st part is seconds, seconds part is microseconds
+  tot_loop_time = (t_end.tv_sec - t_start.tv_sec)*1000 + (t_end.tv_usec - t_start.tv_usec)/1000.0f;
+
+  printf("Total Iterations: %d \n",no_itr);
+  printf("Average time per step is %5.4f ms \n",tot_time/no_itr);
+  printf("Average time for collisions is %5.4f ms \n",tot_col_time/no_itr);
+  printf("Average time for velocity updates is %5.4f ms \n",tot_vel_time/no_itr);
+  printf("Average time for position updates is %5.4f ms \n",tot_pos_time/no_itr);
+  printf("Total time for loop is %5.4f ms\n",tot_loop_time);
+ 
+*/
   
   return 0;
 }

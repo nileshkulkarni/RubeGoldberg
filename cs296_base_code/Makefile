@@ -114,7 +114,7 @@ install:
 	@rm -rf $(EXTERNAL_ROOT)/src/lib/*
 	@tar -xzf $(EXTERNAL_ROOT)/src/Box2D.tgz -C $(EXTERNAL_ROOT)/src
 	@mkdir $(EXTERNAL_ROOT)/src/Box2D/build296
-	@cd $(EXTERNAL_ROOT)/src/Box2D/build296;cmake ../ 
+	@cd $(EXTERNAL_ROOT)/src/Box2D/build296;cmake -DCMAKE_BUILD_TYPE=Debug ../ 
 	@make -C $(EXTERNAL_ROOT)/src/Box2D/build296
 	@make -C $(EXTERNAL_ROOT)/src/Box2D/build296 install
 	@make clean

@@ -60,12 +60,16 @@ The main purpose of our design was to do some easy task with a lot of complexity
 		\item Blocking Rod
 		\item Rotating Gears
 	\end{itemize}
- 	\begin{figure}[ht]
-	\includegraphics[height=100mm]{machine.eps}
+ 	
+	\begin{figure}[ht]
+			\begin{center}
+			\includegraphics[height=70mm]{machine.eps}
 	\caption{RubeGoldberg Machine}	
-	\label{fig:ResourceIntensivePlot01}
+	\label{fig:machine}
+	\end{center}
 	\end{figure}
 
+\pagebreak
 
 \section{Difference between the original and finished design}
 We have moslty follwed the design we proposed but with a minor change that we are going to ring a bell instead of liting a bulb as shown in the design. And most of the design has been followed strictly with extra additions to it and nothing deleted from it. Feature extension of sounds on certain collisions has been added.
@@ -75,7 +79,18 @@ We have moslty follwed the design we proposed but with a minor change that we ar
 \section{Brief Overview of the Code}
 	Most of the code editing pertaining to showing objects and adding them to display is done in the "dominos.cpp" file. Secondly there has been use of multithreading in the project to add sound to the simulation. These form the important parts of the project, ofcourse not forgetting to mention the Box2D library and the certain parts of the code orignally belonging to base.
 	We have written our cutsom class(inherited it from b2ContactSolver) for getting feedback on collision and whose callback function helps us in some actions. 
+	We have used multithreading in out code to play the music using the p\_thread library. It is shown in the following call call graph. Also the system usage due to the threading is not significant.
 	The files which include editing from our side are dominos.cpp, cs296\_base.hpp, cs296\_base.cpp. Also we are using mpg123 to play the .mp3 files.
+
+	\begin{figure}[ht]
+			\begin{center}
+		\includegraphics[width=115mm]{threading.eps}
+		\caption{Call Graph Showing use of Threading}	
+		\label{fig:Threading}
+		\end{center}
+	\end{figure}
+
+\pagebreak
 
 \section{Analysis of the code}
 Code analysis using Gprof Matplotlib and GunPlot
@@ -204,10 +219,6 @@ The functions can be very effectively optimized by inlining i.e. overhead associ
 	\includegraphics[width=90mm]{1.eps}
 	\caption{CallGraph Debug Mode}	
 	\end{minipage}	
-	\begin{minipage}[ht]{0.5\linewidth}
-	\includegraphics[width=90mm]{2.eps}
-	\caption{CallGraph Release Mode}		
-	\end{minipage}	
 	\end{figure}
 
 In the release-version in-lining of functions is done extensively. This is visible from the profiles generated. In debug version in-lining is not done to analyse the code and make it more readable. This is because one needs to keep a track of all the calls that are generated in order have the debug data.\\
@@ -218,10 +229,6 @@ Hence we also observe that the number of functional calls have been significantl
 \begin{figure}[ht]
 	\includegraphics[width=180mm]{3.eps}
 	\caption{DebugMode}			
-\end{figure}
-\begin{figure}[ht]
-	\includegraphics[width=180mm]{4.eps}
-	\caption{Release Mode}			
 \end{figure}
 As visible from a call graph and images in release version, mostly the functions single functions calls.
 For example  the b2Vec constructor has been called by various functions which has been  all been turned inline.

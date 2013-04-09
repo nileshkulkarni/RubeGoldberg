@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=latex 2013.1.17)  9 APR 2013 12:57
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=latex 2013.1.17)  10 APR 2013 02:03
 entering extended mode
  %&-line parsing enabled.
 **report.tex
@@ -274,7 +274,7 @@ Package: geometry 2008/12/21 v4.2 Page Geometry
 \Gm@dimlist=\toks30
 ) (./report.aux
 
-LaTeX Warning: Label `fig:ResourceIntensivePlot01' multiply defined.
+LaTeX Warning: Label `fig:machine' multiply defined.
 
 )
 \openout1 = `report.aux'.
@@ -375,31 +375,32 @@ File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 52.
 File: machine.eps Graphic file (type eps)
- <machine.eps>
-File: plots/g28_plot01.eps Graphic file (type eps)
+ <machine.eps> [1]
+File: threading.eps Graphic file (type eps)
 
-<plots/g28_plot01.eps>
+<threading.eps> [2]
+File: plots/g28_plot01.eps Graphic file (type eps)
+ <plots/g28_plot01.eps>
 File: plots1/g28_plot01.eps Graphic file (type eps)
  <plots1/g28_plot01.eps>
-Overfull \hbox (2.43333pt too wide) in paragraph at lines 84--94
+Overfull \hbox (2.43333pt too wide) in paragraph at lines 99--109
 []$[]$ $[]$ 
  []
 
-[1]
 File: plots/g28_plot02.eps Graphic file (type eps)
- <plots/g28_plot02.eps>
+<plots/g28_plot02.eps>
 File: plots1/g28_plot02.eps Graphic file (type eps)
  <plots1/g28_plot02.eps>
-Overfull \hbox (2.43333pt too wide) in paragraph at lines 108--116
+Overfull \hbox (2.43333pt too wide) in paragraph at lines 123--131
 []$[]$ $[]$ 
  []
 
-[2] [3]
+[3]
 File: plots/g28_plot03.eps Graphic file (type eps)
  <plots/g28_plot03.eps>
 File: plots1/g28_plot03.eps Graphic file (type eps)
  <plots1/g28_plot03.eps>
-Overfull \hbox (2.43333pt too wide) in paragraph at lines 127--137
+Overfull \hbox (2.43333pt too wide) in paragraph at lines 142--152
 []$[]$ $[]$ 
  []
 
@@ -407,7 +408,7 @@ File: plots/g28_plot04.eps Graphic file (type eps)
 <plots/g28_plot04.eps>
 File: plots1/g28_plot04.eps Graphic file (type eps)
  <plots1/g28_plot04.eps>
-Overfull \hbox (2.43333pt too wide) in paragraph at lines 147--155
+Overfull \hbox (2.43333pt too wide) in paragraph at lines 162--170
 []$[]$ $[]$ 
  []
 
@@ -415,7 +416,7 @@ File: plots/g28_plot05.eps Graphic file (type eps)
 <plots/g28_plot05.eps>
 File: plots1/g28_plot05.eps Graphic file (type eps)
  <plots1/g28_plot05.eps>
-Overfull \hbox (2.43333pt too wide) in paragraph at lines 164--172
+Overfull \hbox (2.43333pt too wide) in paragraph at lines 179--187
 []$[]$ $[]$ 
  []
 
@@ -424,7 +425,7 @@ File: plots/g28_plot06.eps Graphic file (type eps)
  <plots/g28_plot06.eps>
 File: plots1/g28_plot06.eps Graphic file (type eps)
  <plots1/g28_plot06.eps>
-Overfull \hbox (2.43333pt too wide) in paragraph at lines 185--193
+Overfull \hbox (2.43333pt too wide) in paragraph at lines 200--208
 []$[]$ $[]$ 
  []
 
@@ -432,12 +433,12 @@ File: 1.eps Graphic file (type eps)
 <1.eps>
 File: 2.eps Graphic file (type eps)
  <2.eps>
-Overfull \hbox (2.43333pt too wide) in paragraph at lines 203--211
+Overfull \hbox (2.43333pt too wide) in paragraph at lines 218--226
 []$[]$ $[]$ 
  []
 
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 213--214
+Underfull \hbox (badness 10000) in paragraph at lines 228--229
 
  []
 
@@ -445,27 +446,27 @@ File: 3.eps Graphic file (type eps)
 <3.eps>
 File: 4.eps Graphic file (type eps)
  <4.eps>
-Underfull \hbox (badness 10000) in paragraph at lines 216--230
+Underfull \hbox (badness 10000) in paragraph at lines 231--245
 
  []
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 231--235
+Underfull \hbox (badness 10000) in paragraph at lines 246--250
 
  []
 
-[7] (./report.aux)
+[7] [8] (./report.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 5422 strings out of 495062
- 76371 string characters out of 1182644
+ 5426 strings out of 495062
+ 76425 string characters out of 1182644
  152882 words of memory out of 3000000
- 8501 multiletter control sequences out of 15000+50000
+ 8504 multiletter control sequences out of 15000+50000
  11520 words of font info for 44 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 38i,7n,36p,612b,330s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 38i,7n,36p,612b,316s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on report.dvi (8 pages, 35380 bytes).
+Output written on report.dvi (9 pages, 36664 bytes).
