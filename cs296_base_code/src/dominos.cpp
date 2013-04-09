@@ -317,7 +317,7 @@ namespace cs296
      
  
  
- // the horizontal shelf below the chain of balls and beside the falling ball
+ // the horizontal shelf containing first set of train of dominoes
 {
       b2PolygonShape horizshape;
       horizshape.SetAsBox(4.0f, 0.05f, b2Vec2(-10.f,10.f), 0.0f);
@@ -328,7 +328,7 @@ namespace cs296
       hground->CreateFixture(&horizshape, 0.0f);
     }
 
-    //horizontal Dominos 
+    //horizontal Dominos (first set)
     {
       b2PolygonShape shape;
       shape.SetAsBox(0.1f, 1.0f);
@@ -339,15 +339,17 @@ namespace cs296
       fd.friction = 0.1f;
 		
       for (int i = 0; i < 4; ++i)
-	{
-	  b2BodyDef bd;
-	  bd.type = b2_dynamicBody;
-	  bd.position.Set(11.25f + 1.0f * i, 18.6f);
-	  b2Body* body = m_world->CreateBody(&bd);
-	  body->CreateFixture(&fd);
-	}
+      {
+      	  b2BodyDef bd;
+      	  bd.type = b2_dynamicBody;
+      	  bd.position.Set(11.25f + 1.0f * i, 18.6f);
+      	  b2Body* body = m_world->CreateBody(&bd);
+      	  body->CreateFixture(&fd);
+      }
     }
-// the ball beside Dominos
+
+
+// the ball beside Dominos(first set)
 {
       b2Body* spherebody;
 	
@@ -372,7 +374,7 @@ namespace cs296
 
 
 
- // the left horizontal shelf beside the dominos
+ // the left slant shelf shelf beside the shelf having first set of dominos
 {
       b2PolygonShape horizshape;
       horizshape.SetAsBox(4.0f, 0.05f, b2Vec2(-10.f,10.f), 0.0f);
@@ -383,8 +385,9 @@ namespace cs296
       b2Body* hground = m_world->CreateBody(&bdh);
       hground->CreateFixture(&horizshape, 0.0f);
     }
-//the right horizontal shelf beside the dominos
-{
+
+//the right slant shelf beside the shelf having first set of dominos
+    {
       b2PolygonShape horizshape;
       horizshape.SetAsBox(4.0f, 0.05f, b2Vec2(-10.f,10.f), 0.0f);
 	
@@ -397,7 +400,7 @@ namespace cs296
 
 // other Dominos packet
 //************************************************************************************
-//horizontal shelf (1)
+//horizontal shelf containing second set of dominos
 {
       b2PolygonShape horizshape;
       horizshape.SetAsBox(3.0f, 0.1f, b2Vec2(-10.f,10.f), 0.0f);
@@ -407,7 +410,7 @@ namespace cs296
       b2Body* hground = m_world->CreateBody(&bdh);
       hground->CreateFixture(&horizshape, 0.0f);
     }
-//horizontal shelf (1)
+//horizontal shelf containing third set of dominos
 {
       b2PolygonShape horizshape;
       horizshape.SetAsBox(3.0f, 0.1f, b2Vec2(-10.f,10.f), 0.0f);
@@ -417,7 +420,8 @@ namespace cs296
       b2Body* hground = m_world->CreateBody(&bdh);
       hground->CreateFixture(&horizshape, 0.0f);
     }
-  //horizontal Dominos 
+
+  //horizontal Dominos (second set)
     {
       b2PolygonShape shape;
       shape.SetAsBox(0.1f, 1.0f);
@@ -428,15 +432,17 @@ namespace cs296
       fd.friction = 0.1f;
 		
       for (int i = 0; i < 6; ++i)
-	{
-	  b2BodyDef bd;
-	  bd.type = b2_dynamicBody;
-	  bd.position.Set(26.25f + 1.0f * i, 12.5f);
-	  b2Body* body = m_world->CreateBody(&bd);
-	  body->CreateFixture(&fd);
-	}
+    	{
+    	  b2BodyDef bd;
+    	  bd.type = b2_dynamicBody;
+    	  bd.position.Set(26.25f + 1.0f * i, 12.5f);
+    	  b2Body* body = m_world->CreateBody(&bd);
+    	  body->CreateFixture(&fd);
+    	}
     }
-//horizontal Dominos 
+
+
+//horizontal Dominos (third set)
     {
       b2PolygonShape shape;
       shape.SetAsBox(0.1f, 1.0f);
@@ -447,20 +453,18 @@ namespace cs296
       fd.friction = 0.1f;
 		
       for (int i = 0; i < 3; ++i)
-	{
-	  b2BodyDef bd;
-	  bd.type = b2_dynamicBody;
-	  bd.position.Set(32.5f + 1.0f * i, 13.5f);
-	  b2Body* body = m_world->CreateBody(&bd);
-	  body->CreateFixture(&fd);
-	}
+    	{
+    	  b2BodyDef bd;
+    	  bd.type = b2_dynamicBody;
+    	  bd.position.Set(32.5f + 1.0f * i, 13.5f);
+    	  b2Body* body = m_world->CreateBody(&bd);
+    	  body->CreateFixture(&fd);
+    	}
     }
 
-// the ball beside Dominos
+// the ball beside third set of dominos
 {
 		//Ball *b= new Ball(m_world);
-		
-		
 		
       b2Body* spherebody;
 	
@@ -495,9 +499,6 @@ namespace cs296
 		fd1->shape= &bs1;
 		b2Body * box2 = m_world->CreateBody(bd);
 		box2->CreateFixture(fd1);
-
-	
-	
 	
 	}
 
@@ -528,6 +529,9 @@ namespace cs296
 	b1 = m_world->CreateBody(&bd);
 	b1->CreateFixture(&shape,0.0f);
 }*/
+
+
+
 //Right Side Slants
   b2EdgeShape shape;
   
@@ -541,7 +545,7 @@ namespace cs296
       rightslant1->CreateFixture(&shape, 0.0f);
   }
   
-  
+  //right slant 2
   {
       b2Body* rightslant2;
       
@@ -552,6 +556,7 @@ namespace cs296
       rightslant2->CreateFixture(&shape, 0.0f);
   }
   
+  //right slant 3
  {
       b2Body* rightslant2;
     
@@ -562,7 +567,7 @@ namespace cs296
       rightslant2->CreateFixture(&shape, 0.0f);
   }
   
-  
+  //left slant 1
  
   {
       b2Body* leftslant1;
@@ -574,6 +579,7 @@ namespace cs296
       leftslant1->CreateFixture(&shape, 0.0f);
   }
   
+  //left slant 2
   {
       b2Body* leftslant2;
       
@@ -584,6 +590,8 @@ namespace cs296
       leftslant2->CreateFixture(&shape, 0.0f);
   }
   
+
+  //left slant 3
   {
       b2Body* leftslant3;
       
@@ -594,6 +602,8 @@ namespace cs296
       leftslant3->CreateFixture(&shape, 0.0f);
   }
   
+
+  //shelf below slants
   {
       b2Body* shelf;
       
@@ -668,6 +678,10 @@ namespace cs296
  
 
 
+//Alarm system below
+
+    //shelf on top
+
 	{
 		b2BodyDef* bd = new b2BodyDef;
 		bd->fixedRotation=true;
@@ -680,13 +694,10 @@ namespace cs296
 		fd1->shape= &bs1;
 		b2Body * box2 = m_world->CreateBody(bd);
 		box2->CreateFixture(fd1);
-
-	
-	
 	
 	}
 
-
+//shelf below that
 	{
 		b2BodyDef* bd = new b2BodyDef;
 		bd->fixedRotation=true;
@@ -700,9 +711,6 @@ namespace cs296
 		b2Body * box2 = m_world->CreateBody(bd);
 		box2->CreateFixture(fd1);
 
-	
-	
-	
 	}
 
 	//no adding the second alarm thing here;
@@ -730,9 +738,7 @@ namespace cs296
       }
 
 
-// plate near the slant and below part
-
-     //The revolving horizontal platform
+// plate near the slant and below part blocking ball falling on dominos
     {
       b2PolygonShape shape;
       shape.SetAsBox(0.2f, 1.7f);
@@ -761,6 +767,86 @@ namespace cs296
       jointDef.collideConnected = false;
       m_world->CreateJoint(&jointDef);
     }
+
+
+//create gear with a set of lines (facing problems)
+
+    {
+
+
+      b2BodyDef *bd = new b2BodyDef;
+      //bd->type = b2_dynamicBody;
+      bd->position.Set(0,5);
+      bd->fixedRotation = true;
+      b2Body* box1 = m_world->CreateBody(bd);
+      
+      //Toothed gear
+      b2FixtureDef *fd1 = new b2FixtureDef;
+      fd1->shape = new b2PolygonShape;
+      b2PolygonShape bs1;
+
+      float shiftx=0.0f,shifty=5.0,radius=5.0f;
+
+
+      for(int i=1;i<=3;i++)
+      {
+
+        bs1.SetAsBox(0.7,0.2, b2Vec2(shiftx+radius*sin(pi*i/8.0),shifty+radius*cos(pi*i/8.0)), -pi*i/8.0);
+        fd1->shape = &bs1;
+        box1->CreateFixture(fd1);
+
+      }
+  
+    }
+
+
+    //The start left
+    {
+      b2PolygonShape shape;
+      shape.SetAsBox(2.2f, 0.2f);
+  
+      b2BodyDef bd;
+      bd.position.Set(-2.3f, 10.67f);
+      bd.type = b2_dynamicBody;
+      b2Body* body = m_world->CreateBody(&bd);
+      b2FixtureDef *fd = new b2FixtureDef;
+      fd->density = 1.f;
+      fd->shape = new b2PolygonShape;
+      fd->shape = &shape;
+      body->CreateFixture(fd);
+
+
+      b2PolygonShape shape2;
+      shape2.SetAsBox(0.2f, 2.0f);
+       b2FixtureDef *fd2 = new b2FixtureDef;
+      fd2->density = 1.f;
+      fd2->shape = new b2PolygonShape;
+      fd2->shape = &shape2;
+      body->CreateFixture(fd2);
+
+
+  
+      b2BodyDef bd3;
+      bd3.position.Set(-2.3f, 10.67f);
+      b2Body* body3 = m_world->CreateBody(&bd3);
+      b2FixtureDef *fd3 = new b2FixtureDef;
+  
+
+      b2RevoluteJointDef jointDef;
+      jointDef.bodyA = body;
+      jointDef.bodyB = body3;
+      jointDef.localAnchorA.Set(0,0);
+      jointDef.localAnchorB.Set(0,0);
+      jointDef.collideConnected = false;
+      m_world->CreateJoint(&jointDef);
+
+
+    }
+
+
+   
+
+
 
 
 
