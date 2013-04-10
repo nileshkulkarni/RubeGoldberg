@@ -213,7 +213,8 @@ class Ball
 	static void* play(void*)
 	{
 		std::cout<<"threading is working";
-		system("mpg123 resources/alarm.mp3");
+		int i =system("mpg123 resources/alarm.mp3");
+		i=1;
 		return NULL;
 	}
 	void startContact() 
@@ -233,6 +234,7 @@ class Ball
 			if(!calledOnce && !calledTwice)
 			{
 				int result = pthread_create(&t1,0,Ball::play,this);	
+				result=1;
 				calledOnce=true;
 			}
 			else if(calledOnce)
