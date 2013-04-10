@@ -68,7 +68,6 @@ namespace cs296
   class base_sim_t;
   struct settings_t;
 
-
   //! Why do we use a typedef
   /*! - A typedef declaration introduces a name that, within its scope, becomes a synonym for the type given by the type-declaration portion of the declaration
   * - typedef is helpful for giving a short, sharp alias to complicated function pointer types
@@ -170,99 +169,10 @@ namespace cs296
     b2PointState state;
   };
   
-  //! The Class \a base_sim_t
-  //!   - It is an inherited class from \c b2ContactListener which is used to get the contact details whenever some bodies come into contact.\n
-  //!   - It has the main world object as data member
-  //!   - It has the PreSolve function which is things to be done after collision detection
- 
-
- //!   - It has the Step function which is responsible for the motion of objects in the world!
-
-  
-  
-  
-    class base_sim_t : public b2ContactListener
-  {
-  public:
-    
-    base_sim_t();
-
-    //! Virtual destructors - amazing objects. Why are these necessary?
-    /*! - Virtual destructors are useful when you can delete an instance of a derived class through a pointer to base class.
-    * - Always make base classes' destructors virtual when they're meant to be manipulated polymorphically.
-    * - If you want to prevent the deletion of an instance through a base class pointer, you can make the base class destuctor protected and nonvirtual; by doing so, the compiler won't let you call delete on a base class pointer.
-    */
-    virtual ~base_sim_t();
-    
-    void set_text_line(int32 line) { m_text_line = line; }
-    void draw_title(int x, int y, const char *string);
-    
-    virtual void step(settings_t* settings);
-
-    virtual void keyboard(unsigned char key) { B2_NOT_USED(key); }
-    virtual void keyboard_up(unsigned char key) { B2_NOT_USED(key); }
-
-    void shift_mouse_down(const b2Vec2& p) { B2_NOT_USED(p); }
-    virtual void mouse_down(const b2Vec2& p) { B2_NOT_USED(p); }
-    virtual void mouse_up(const b2Vec2& p) { B2_NOT_USED(p); }
-    void mouse_move(const b2Vec2& p) { B2_NOT_USED(p); }
-
-    
-    // Let derived tests know that a joint was destroyed.
-    virtual void joint_destroyed(b2Joint* joint) { B2_NOT_USED(joint); }
-    
-    // Callbacks for derived classes.
-    virtual void begin_contact(b2Contact* contact);
-    virtual void end_contact(b2Contact* contact);
-    virtual void pre_solve(b2Contact* contact, const b2Manifold* oldManifold);
-    virtual void post_solve(const b2Contact* contact, const b2ContactImpulse* impulse)
-    {
-      B2_NOT_USED(contact);
-      B2_NOT_USED(impulse);
-    }
-
-	inline b2World* get_world(void){
-		return m_world;
-	}
-	
-  //!How are protected members different from private memebers of a class in C++ ?
-    /*! - Private members are only accessible within the class defining them.\n
-          Protected members are accessible in the class that defines them and in classes that inherit from that class.
-      * - Both are also accessible by friends of their class, and in the case of protected members, by friends of their derived classes.
-    */
 
 
-  protected:
 
-    //! What are Friend classes?
-    /*! - A friend class in C++, can access the "private" and "protected" members of the class in which it is declared as a friend.
-     * - On declaration of friend class all member function of the friend class become friends of the class in which the friend class was declared.
-     * - Friend status is not inherited; every friendship has to be explicitly declared.
-     * - Friend classes can help in improving Encapsulation if used wisely.
-    */
-    friend class contact_listener_t;
-    
-    b2Body* m_ground_body;
-    b2AABB m_world_AABB;
-    contact_point_t m_points[k_max_contact_points];
-    int32 m_point_count;
 
-    debug_draw_t m_debug_draw;
-    int32 m_text_line;
-	MyContactListener mycontact;    
-	b2World* m_world;
-
-	
-
-    int32 m_step_count;
-    
-    b2Profile m_max_profile;
-    b2Profile m_total_profile;
-  };
-
- 
-
-}
 
 
 /*! This is custom class that genrates a custom surface on the objects to which we want to do some particular action on call back.
@@ -368,17 +278,122 @@ class MyContactListener : public b2ContactListener
       void* bodyUserData = contact->GetFixtureA()->GetBody()->GetUserData();
 	  if ( bodyUserData ){
         static_cast<Ball*>( bodyUserData )->endContact();
-		static_cast<Ball*>( bodyUserData )->musicThreadjoin();
 	  }
       //check if fixture B was a ball
       bodyUserData = contact->GetFixtureB()->GetBody()->GetUserData();
       if ( bodyUserData ){
         static_cast<Ball*>( bodyUserData )->endContact();
-		static_cast<Ball*>( bodyUserData )->musicThreadjoin();
     }
 	}
  
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //! The Class \a base_sim_t
+  //!   - It is an inherited class from \c b2ContactListener which is used to get the contact details whenever some bodies come into contact.\n
+  //!   - It has the main world object as data member
+  //!   - It has the PreSolve function which is things to be done after collision detection
+ 
+
+ //!   - It has the Step function which is responsible for the motion of objects in the world!
+
+  
+  
+  
+    class base_sim_t : public b2ContactListener
+  {
+  public:
+    
+    base_sim_t();
+
+    //! Virtual destructors - amazing objects. Why are these necessary?
+    /*! - Virtual destructors are useful when you can delete an instance of a derived class through a pointer to base class.
+    * - Always make base classes' destructors virtual when they're meant to be manipulated polymorphically.
+    * - If you want to prevent the deletion of an instance through a base class pointer, you can make the base class destuctor protected and nonvirtual; by doing so, the compiler won't let you call delete on a base class pointer.
+    */
+    virtual ~base_sim_t();
+    
+    void set_text_line(int32 line) { m_text_line = line; }
+    void draw_title(int x, int y, const char *string);
+    
+    virtual void step(settings_t* settings);
+
+    virtual void keyboard(unsigned char key) { B2_NOT_USED(key); }
+    virtual void keyboard_up(unsigned char key) { B2_NOT_USED(key); }
+
+    void shift_mouse_down(const b2Vec2& p) { B2_NOT_USED(p); }
+    virtual void mouse_down(const b2Vec2& p) { B2_NOT_USED(p); }
+    virtual void mouse_up(const b2Vec2& p) { B2_NOT_USED(p); }
+    void mouse_move(const b2Vec2& p) { B2_NOT_USED(p); }
+
+    
+    // Let derived tests know that a joint was destroyed.
+    virtual void joint_destroyed(b2Joint* joint) { B2_NOT_USED(joint); }
+    
+    // Callbacks for derived classes.
+    virtual void begin_contact(b2Contact* contact);
+    virtual void end_contact(b2Contact* contact);
+    virtual void pre_solve(b2Contact* contact, const b2Manifold* oldManifold);
+    virtual void post_solve(const b2Contact* contact, const b2ContactImpulse* impulse)
+    {
+      B2_NOT_USED(contact);
+      B2_NOT_USED(impulse);
+    }
+
+	inline b2World* get_world(void){
+		return m_world;
+	}
+	
+  //!How are protected members different from private memebers of a class in C++ ?
+    /*! - Private members are only accessible within the class defining them.\n
+          Protected members are accessible in the class that defines them and in classes that inherit from that class.
+      * - Both are also accessible by friends of their class, and in the case of protected members, by friends of their derived classes.
+    */
+
+
+  protected:
+
+    //! What are Friend classes?
+    /*! - A friend class in C++, can access the "private" and "protected" members of the class in which it is declared as a friend.
+     * - On declaration of friend class all member function of the friend class become friends of the class in which the friend class was declared.
+     * - Friend status is not inherited; every friendship has to be explicitly declared.
+     * - Friend classes can help in improving Encapsulation if used wisely.
+    */
+    friend class contact_listener_t;
+    
+    b2Body* m_ground_body;
+    b2AABB m_world_AABB;
+    contact_point_t m_points[k_max_contact_points];
+    int32 m_point_count;
+
+    debug_draw_t m_debug_draw;
+    int32 m_text_line;
+	MyContactListener mycontact;    
+	b2World* m_world;
+
+	
+
+    int32 m_step_count;
+    
+    b2Profile m_max_profile;
+    b2Profile m_total_profile;
+  };
+
+ 
+
+}
+
 
 
 #endif

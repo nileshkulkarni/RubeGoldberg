@@ -23,6 +23,7 @@ OBJDIR = $(PROJECT_ROOT)/obj
 BINDIR = $(PROJECT_ROOT)/bin
 DOCDIR = $(PROJECT_ROOT)/doc
 
+INSTALL_PATH=/home/nilesh/Desktop
 # Library Paths
 BOX2D_ROOT=$(EXTERNAL_ROOT)
 GLUI_ROOT=/usr
@@ -58,7 +59,7 @@ INCS := $(wildcard $(SRCDIR)/*.hpp)
 OBJS := $(SRCS:$(SRCDIR)/%.cpp=$(OBJDIR)/%.o)
 
 
-.PHONY: all setup doc clean distclean dist install
+.PHONY: all setup doc clean distclean dist install BOX2DLIB setBox2d
 
 all: setup $(BINDIR)/$(TARGET)
 
@@ -80,6 +81,8 @@ $(BINDIR)/$(TARGET): $(OBJS)
 
 -include $(OBJS:.o=.d)
 
+BOX2DLIB=$(PROJECT_ROOT)/external/lib/libBox2D.a
+
 $(OBJS): $(OBJDIR)/%.o : $(SRCDIR)/%.cpp
 	@$(PRINTF) "$(MESG_COLOR)Compiling: $(NO_COLOR) $(FILE_COLOR) %25s$(NO_COLOR)" "$(notdir $<)"
 	@$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@ -MD 2> temp.log || touch temp.err
@@ -98,17 +101,27 @@ doc:
 	@$(ECHO) "Done"
 
 
+setBox2d:$(BOX2DLIB)
+	@rm -rf $(EXTERNAL_ROOT)/src/Box2D
+	@rm -rf $(EXTERNAL_ROOT)/src/include/*
+	@rm -rf $(EXTERNAL_ROOT)/src/lib/*
+	@tar -xzf $(EXTERNAL_ROOT)/src/Box2D.tgz -C $(EXTERNAL_ROOT)/src
+	@mkdir $(EXTERNAL_ROOT)/src/Box2D/build296
+	@cd $(EXTERNAL_ROOT)/src/Box2D/build296;cmake -DCMAKE_BUILD_TYPE=Debug ../ 
+	@make -C $(EXTERNAL_ROOT)/src/Box2D/build296
+	@make -C $(EXTERNAL_ROOT)/src/Box2D/build296 install
+
 report: all
 	@echo "Generating report"
 	@make -C $(DOCDIR)	
 #	@python3 scripts/g28_gen_html.py
 
 #source files Box2d tar, src , documentation,Makefile, scripts
-dist: 
+dist:distclean 
+	@$(RM) -rf external/include external/lib external/src/Box2D	
 	@sh scripts/tarProject.sh
 
-install:
-	@mkdir -p debugProfile
+install:distclean
 	@rm -rf $(EXTERNAL_ROOT)/src/Box2D
 	@rm -rf $(EXTERNAL_ROOT)/src/include/*
 	@rm -rf $(EXTERNAL_ROOT)/src/lib/*
@@ -118,7 +131,7 @@ install:
 	@make -C $(EXTERNAL_ROOT)/src/Box2D/build296
 	@make -C $(EXTERNAL_ROOT)/src/Box2D/build296 install
 	@make clean
-	@make 
+	@make
 		
 clean:
 	@$(ECHO) -n "Cleaning up..."
@@ -128,7 +141,12 @@ clean:
 
 distclean: clean
 	@$(RM) -rf $(BINDIR) $(DOCDIR)/html
+	@$(RM) -rf external/include external/lib external/src/Box2D	
+
+
 plot01: setup
+	@rm -rf plots
+	@mkdir plots
 	@rm -rf data/temp.csv
 	@chmod 755 scripts/*.sh
 	@./scripts/gen_data.sh

@@ -1,4 +1,10 @@
 \documentclass[a4paper,11pt]{article}
+%\addtolength{\parindent}{-5mm%}
+%\addtolength{\columnsep}{-5mm}
+%\addtolength{\textwidth}{0.5in}
+%\addtolength{\hoffset}{-0.5in}
+%\addtolength{\textheight}{1in}
+%\addtolength{\voffset}{-1in}
 \usepackage{cite}
 \usepackage{color} 
 \usepackage{amsmath}
@@ -10,6 +16,11 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
+%\hypersetup{
+ %  colorlinks, linkcolor={dark-red},
+   %citecolor={dark-blue}, urlcolor={medium-blue}
+%  }
+%\usepackage{hypersetup}
 \usepackage[top=1.5in, bottom=1.5in, left=0.5in, right=0.5in]{geometry} 
 \begin{document}
 
@@ -53,7 +64,7 @@ The main purpose of our design was to do some easy task with a lot of complexity
 	\begin{figure}[ht]
 			\begin{center}
 			\includegraphics[height=70mm]{machine.eps}
-	\caption{RubeGoldberg Machine }	
+	\caption{RubeGoldberg Machine}	
 	\label{fig:machine}
 	\end{center}
 	\end{figure}
@@ -62,13 +73,6 @@ The main purpose of our design was to do some easy task with a lot of complexity
 
 \section{Difference between the original and finished design}
 We have moslty follwed the design we proposed but with a minor change that we are going to ring a bell instead of liting a bulb as shown in the design. And most of the design has been followed strictly with extra additions to it and nothing deleted from it. Feature extension of sounds on certain collisions has been added.
-
-	\begin{figure}[ht]
-	\begin{center}
-	\includegraphics[height=70mm]{RBM.eps}
-	\caption{Old Design }	
-	\end{center}
-	\end{figure}
 
 
 
@@ -81,7 +85,7 @@ We have moslty follwed the design we proposed but with a minor change that we ar
 	\begin{figure}[ht]
 			\begin{center}
 		\includegraphics[width=115mm]{threading.eps}
-		\caption{Call Graph Showing use of Threading }	
+		\caption{Call Graph Showing use of Threading}	
 		\label{fig:Threading}
 		\end{center}
 	\end{figure}
@@ -99,7 +103,7 @@ Code analysis using Gprof Matplotlib and GunPlot
 	\end{minipage}	
 	\begin{minipage}[ht]{0.5\linewidth}
 	\includegraphics[height=50mm]{plots1/g28_plot01.eps}
-	\caption{System Resource usage is Low }
+	\caption{System Resource usage is Low}
 	\label{fig:ResourceIntensivePlot01a}
 	\end{minipage}	
 	\end{figure}
@@ -113,16 +117,16 @@ Code analysis using Gprof Matplotlib and GunPlot
     \item The Step-Time in Figure~\ref{fig:ResourceIntensivePlot01a} is not scattered and we can see certain decreasing pattern. We can see that the step-time value is large in small number of Iterative-Values and less in the greater range of Iterative-Values, because as the iteration number increase the process becomes more resource intensive and operating system tries to give more resources to such a process(if it can) and hence we observe a decrease in step time. We also feel that as the time for which the process executes increase it gets more CPU resources. 
     \item There is one more interesting observation on the loop time graph which can be divided approximately into two linear graphs,the later one less steeper than the former and the reason for such a behaviour is that the operating system tends to allocate more resources to a program which has been running for a longer time.
     \end{itemize}
- 
+  %  \pagebreak
 \subsection{Plot02 : Step-Time, Collision-Time ,Velocity-Update ,Position-Update Vs Iterative Values }
 	\begin{figure}[ht]
 	\begin{minipage}[ht]{0.5\linewidth}
 	\includegraphics[height=50mm]{plots/g28_plot02.eps}
-	\caption{System Resource usage is High }		
+	\caption{System Resource usage is High}		
 	\end{minipage}	
 	\begin{minipage}[ht]{0.5\linewidth}
 	\includegraphics[height=50mm]{plots1/g28_plot02.eps}
-	\caption{System Resource usage is Low }		
+	\caption{System Resource usage is Low}		
 	\end{minipage}	
 	\end{figure}
 	Analysis :
@@ -137,12 +141,12 @@ Code analysis using Gprof Matplotlib and GunPlot
 	\begin{figure}[ht]
 	\begin{minipage}[ht]{0.5\linewidth}
 	\includegraphics[height=50mm]{plots/g28_plot03.eps}
-	\caption{System Resource usage is High }		
+	\caption{System Resource usage is High}		
 	\label{fig:1}
 	\end{minipage}	
 	\begin{minipage}[ht]{0.5\linewidth}
 	\includegraphics[height=50mm]{plots1/g28_plot03.eps}
-	\caption{System Resource usage is Low }		
+	\caption{System Resource usage is Low}		
 	\label{fig:2}
 	\end{minipage}	
 	\end{figure}
@@ -152,16 +156,16 @@ Code analysis using Gprof Matplotlib and GunPlot
 	Figure~\ref{fig:2} are almost equal to zero, the reason is already explained in Figure-1 and Figure-2
 	The step time in loaded system 0.5 approximately. This was as expected since the system was loaded.
 	\end{itemize}
-
+%	\pagebreak
 \subsection{Plot04 : Step-Time, Collision-Time, Velocity-Update, Position-Update Vs Rerun-Values}
 \begin{figure}[ht]
 	\begin{minipage}[ht]{0.5\linewidth}
 	\includegraphics[height=50mm]{plots/g28_plot04.eps}
-	\caption{System resources usage is High }		
+	\caption{System resources usage is High}		
 	\end{minipage}	
 	\begin{minipage}[ht]{0.5\linewidth}
 	\includegraphics[height=50mm]{plots1/g28_plot04.eps}
-	\caption{System Resource usage is Low }		
+	\caption{System Resource usage is Low}		
 	\end{minipage}	
 	\end{figure}
 		Analysis :
@@ -174,11 +178,11 @@ Code analysis using Gprof Matplotlib and GunPlot
 	\begin{figure}[ht]
 	\begin{minipage}[ht]{0.5\linewidth}
 	\includegraphics[height=50mm]{plots/g28_plot05.eps}
-	\caption{System Resource usage is High }	
+	\caption{System Resource usage is High}	
 	\end{minipage}	
 	\begin{minipage}[ht]{0.5\linewidth}
 	\includegraphics[height=50mm]{plots1/g28_plot05.eps}
-	\caption{System Resource usage is Low }		
+	\caption{System Resource usage is Low}		
 	\end{minipage}	
 	\end{figure}
 	Analysis :
@@ -195,11 +199,11 @@ Code analysis using Gprof Matplotlib and GunPlot
 \begin{figure}[ht]
 	\begin{minipage}[ht]{0.5\linewidth}
 	\includegraphics[height=50mm]{plots/g28_plot06.eps}
-	\caption{System Resource usage is High }	
+	\caption{System Resource usage is High}	
 	\end{minipage}	
 	\begin{minipage}[ht]{0.5\linewidth}
 	\includegraphics[height=50mm]{plots1/g28_plot06.eps}
-	\caption{System Resource usage is Low }		
+	\caption{System Resource usage is Low}		
 	\end{minipage}	
 	\end{figure}
 		Analysis :
@@ -213,7 +217,7 @@ The functions can be very effectively optimized by inlining i.e. overhead associ
 \begin{figure}[ht]
 	\begin{minipage}[ht]{0.5\linewidth}
 	\includegraphics[width=90mm]{1.eps}
-	\caption{CallGraph Debug Mode }	
+	\caption{CallGraph Debug Mode}	
 	\end{minipage}	
 	\end{figure}
 
@@ -224,7 +228,7 @@ Observe a crucial fact that if the overhead of a calling the function which incl
 Hence we also observe that the number of functional calls have been significantly reduced due to such a methodology.\\
 \begin{figure}[ht]
 	\includegraphics[width=180mm]{3.eps}
-	\caption{DebugMode }			
+	\caption{DebugMode}			
 \end{figure}
 As visible from a call graph and images in release version, mostly the functions single functions calls.
 For example  the b2Vec constructor has been called by various functions which has been  all been turned inline.
