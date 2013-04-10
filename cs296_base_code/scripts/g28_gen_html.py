@@ -11,7 +11,7 @@ html.write('''
 <h1 style="text-align:center"> RubeGoldberg Machine</h1>
  ''')
 
-tagList=['begin','includegraphics','itemize','item','caption','label','verbatim','end','pagebreak']
+tagList=['begin','cite','bibliography','bibliographystyle','includegraphics','itemize','item','caption','label','verbatim','end','pagebreak']
 
 def isTag(word):
 	wordList= "".join((char if (not char in string.punctuation) else " ") for char in word).split()

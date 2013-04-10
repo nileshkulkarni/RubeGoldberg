@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=latex 2013.1.17)  10 APR 2013 18:14
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=latex 2013.1.17)  10 APR 2013 20:43
 entering extended mode
  %&-line parsing enabled.
 **report_project_g28.tex
@@ -378,54 +378,54 @@ File: images/RBM.eps Graphic file (type eps)
  <images/RBM.eps> [2]
 File: images/threading.eps Graphic file (type eps)
  <images/threading.eps> [3]
-File: plots/g28_plot01.eps Graphic file (type eps)
- <plots/g28_plot01.eps>
-File: plots1/g28_plot01.eps Graphic file (type eps)
+File: plots/g28_project_plot01.eps Graphic file (type eps)
 
-<plots1/g28_plot01.eps>
+<plots/g28_project_plot01.eps>
+File: plots1/g28_project_plot01.eps Graphic file (type eps)
+ <plots1/g28_project_plot01.eps>
 Overfull \hbox (2.43333pt too wide) in paragraph at lines 95--105
 []$[]$ $[]$ 
  []
 
 [4]
-File: plots/g28_plot02.eps Graphic file (type eps)
- <plots/g28_plot02.eps>
-File: plots1/g28_plot02.eps Graphic file (type eps)
- <plots1/g28_plot02.eps>
+File: plots/g28_project_plot02.eps Graphic file (type eps)
+ <plots/g28_project_plot02.eps>
+File: plots1/g28_project_plot02.eps Graphic file (type eps)
+ <plots1/g28_project_plot02.eps>
 Overfull \hbox (2.43333pt too wide) in paragraph at lines 119--127
 []$[]$ $[]$ 
  []
 
 [5]
-File: plots/g28_plot03.eps Graphic file (type eps)
- <plots/g28_plot03.eps>
-File: plots1/g28_plot03.eps Graphic file (type eps)
- <plots1/g28_plot03.eps>
+File: plots/g28_project_plot03.eps Graphic file (type eps)
+ <plots/g28_project_plot03.eps>
+File: plots1/g28_project_plot03.eps Graphic file (type eps)
+ <plots1/g28_project_plot03.eps>
 Overfull \hbox (2.43333pt too wide) in paragraph at lines 138--148
 []$[]$ $[]$ 
  []
 
-File: plots/g28_plot04.eps Graphic file (type eps)
-<plots/g28_plot04.eps>
-File: plots1/g28_plot04.eps Graphic file (type eps)
- <plots1/g28_plot04.eps>
+File: plots/g28_project_plot04.eps Graphic file (type eps)
+<plots/g28_project_plot04.eps>
+File: plots1/g28_project_plot04.eps Graphic file (type eps)
+ <plots1/g28_project_plot04.eps>
 Overfull \hbox (2.43333pt too wide) in paragraph at lines 158--166
 []$[]$ $[]$ 
  []
 
-File: plots/g28_plot05.eps Graphic file (type eps)
-<plots/g28_plot05.eps>
-File: plots1/g28_plot05.eps Graphic file (type eps)
- <plots1/g28_plot05.eps>
+File: plots/g28_project_plot05.eps Graphic file (type eps)
+<plots/g28_project_plot05.eps>
+File: plots1/g28_project_plot05.eps Graphic file (type eps)
+ <plots1/g28_project_plot05.eps>
 Overfull \hbox (2.43333pt too wide) in paragraph at lines 175--183
 []$[]$ $[]$ 
  []
 
 [6]
-File: plots/g28_plot06.eps Graphic file (type eps)
- <plots/g28_plot06.eps>
-File: plots1/g28_plot06.eps Graphic file (type eps)
- <plots1/g28_plot06.eps>
+File: plots/g28_project_plot06.eps Graphic file (type eps)
+ <plots/g28_project_plot06.eps>
+File: plots1/g28_project_plot06.eps Graphic file (type eps)
+ <plots1/g28_project_plot06.eps>
 Overfull \hbox (2.43333pt too wide) in paragraph at lines 196--204
 []$[]$ $[]$ 
  []
@@ -447,14 +447,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 234--238
 
  []
 
-[9] (./report_project_g28.aux) ) 
+(./report_project_g28.bbl) [9] (./report_project_g28.aux) ) 
 Here is how much of TeX's memory you used:
- 5425 strings out of 495062
- 76641 string characters out of 1182644
+ 5432 strings out of 495062
+ 76876 string characters out of 1182644
  152882 words of memory out of 3000000
- 8503 multiletter control sequences out of 15000+50000
- 11520 words of font info for 44 fonts, out of 3000000 for 9000
+ 8506 multiletter control sequences out of 15000+50000
+ 11821 words of font info for 45 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  38i,7n,36p,624b,369s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on report_project_g28.dvi (10 pages, 37064 bytes).
+Output written on report_project_g28.dvi (10 pages, 38236 bytes).

@@ -1,0 +1,11 @@
+\begin{thebibliography}{1}
+
+\bibitem{Box2d}
+{\sc iforce2d}.
+\newblock Box2d tutuorial{@ONLINE}.
+
+\bibitem{pthread}
+{\sc Muys, A.}
+\newblock Pthread tutorials.
+
+\end{thebibliography}

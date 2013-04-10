@@ -48,7 +48,7 @@ namespace cs296
     {
       b2PolygonShape shape;
        /*!Half Length of Left slant at the top is 12.0 and half width is 0.25 */
-      shape.SetAsBox(12.0f, 0.25f, b2Vec2(-10.f,10.f), 0.0f);/////////////////////////////////////////////
+      shape.SetAsBox(12.0f, 0.25f, b2Vec2(-10.f,10.f), 0.0f);
 	
       b2BodyDef bd;
       /*!Centre of Left slant at the top at (20.0f, 19.8f) inclined at an angle  0.04f * pi; */
@@ -76,7 +76,7 @@ namespace cs296
       
       
 	/*!Top Ball (which serves as hook where pendulum is attached) is made */
-      b2Body* b4;//////////////////////////////////////////////////check if hook?
+      b2Body* b4;
       {
 			b2PolygonShape shape;
 			/*!Half Length of pendulum hook is 0.5 and half width is 0.25 */

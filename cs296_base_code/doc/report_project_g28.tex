@@ -74,8 +74,8 @@ We have moslty follwed the design we proposed but with a minor change that we ar
 
 \section{Brief Overview of the Code}
 	Most of the code editing pertaining to showing objects and adding them to display is done in the "dominos.cpp" file. Secondly there has been use of multithreading in the project to add sound to the simulation. These form the important parts of the project, ofcourse not forgetting to mention the Box2D library and the certain parts of the code orignally belonging to base.
-	We have written our cutsom class(inherited it from b2ContactSolver) for getting feedback on collision and whose callback function helps us in some actions. 
-	We have used multithreading in out code to play the music using the p\_thread library. It is shown in the following call call graph. Also the system usage due to the threading is not significant.
+	We have written our cutsom class(inherited it from b2ContactSolver) for getting feedback on collision and whose callback function helps us in some actions. \cite{Box2d} 
+	We have used multithreading in out code to play the music using the p\_thread library. It is shown in the following call call graph. Also the system usage due to the threading is not significant. \cite{pthread}
 	The files which include editing from our side are dominos.cpp, cs296\_base.hpp, cs296\_base.cpp. Also we are using mpg123 to play the .mp3 files.
 
 	\begin{figure}[ht]
@@ -93,12 +93,12 @@ Code analysis using Gprof Matplotlib and GunPlot
 \subsection{Plot01 : Step-time Vs Iterative Values}
  	\begin{figure}[ht]
 	\begin{minipage}[ht]{0.5\linewidth}
-	\includegraphics[height=50mm]{plots/g28_plot01.eps}
+	\includegraphics[height=50mm]{plots/g28_project_plot01.eps}
 	\caption{System Resource usage is High }	
 	\label{fig:ResourceIntensivePlot01}
 	\end{minipage}	
 	\begin{minipage}[ht]{0.5\linewidth}
-	\includegraphics[height=50mm]{plots1/g28_plot01.eps}
+	\includegraphics[height=50mm]{plots1/g28_project_plot01.eps}
 	\caption{System Resource usage is Low }
 	\label{fig:ResourceIntensivePlot01a}
 	\end{minipage}	
@@ -117,11 +117,11 @@ Code analysis using Gprof Matplotlib and GunPlot
 \subsection{Plot02 : Step-Time, Collision-Time ,Velocity-Update ,Position-Update Vs Iterative Values }
 	\begin{figure}[ht]
 	\begin{minipage}[ht]{0.5\linewidth}
-	\includegraphics[height=50mm]{plots/g28_plot02.eps}
+	\includegraphics[height=50mm]{plots/g28_project_plot02.eps}
 	\caption{System Resource usage is High }		
 	\end{minipage}	
 	\begin{minipage}[ht]{0.5\linewidth}
-	\includegraphics[height=50mm]{plots1/g28_plot02.eps}
+	\includegraphics[height=50mm]{plots1/g28_project_plot02.eps}
 	\caption{System Resource usage is Low }		
 	\end{minipage}	
 	\end{figure}
@@ -136,12 +136,12 @@ Code analysis using Gprof Matplotlib and GunPlot
 
 	\begin{figure}[ht]
 	\begin{minipage}[ht]{0.5\linewidth}
-	\includegraphics[height=50mm]{plots/g28_plot03.eps}
+	\includegraphics[height=50mm]{plots/g28_project_plot03.eps}
 	\caption{System Resource usage is High }		
 	\label{fig:1}
 	\end{minipage}	
 	\begin{minipage}[ht]{0.5\linewidth}
-	\includegraphics[height=50mm]{plots1/g28_plot03.eps}
+	\includegraphics[height=50mm]{plots1/g28_project_plot03.eps}
 	\caption{System Resource usage is Low }		
 	\label{fig:2}
 	\end{minipage}	
@@ -156,11 +156,11 @@ Code analysis using Gprof Matplotlib and GunPlot
 \subsection{Plot04 : Step-Time, Collision-Time, Velocity-Update, Position-Update Vs Rerun-Values}
 \begin{figure}[ht]
 	\begin{minipage}[ht]{0.5\linewidth}
-	\includegraphics[height=50mm]{plots/g28_plot04.eps}
+	\includegraphics[height=50mm]{plots/g28_project_plot04.eps}
 	\caption{System resources usage is High }		
 	\end{minipage}	
 	\begin{minipage}[ht]{0.5\linewidth}
-	\includegraphics[height=50mm]{plots1/g28_plot04.eps}
+	\includegraphics[height=50mm]{plots1/g28_project_plot04.eps}
 	\caption{System Resource usage is Low }		
 	\end{minipage}	
 	\end{figure}
@@ -173,11 +173,11 @@ Code analysis using Gprof Matplotlib and GunPlot
 \subsection{Plot05 : Time averaged over all iterative-values Vs Rerun-Values}
 	\begin{figure}[ht]
 	\begin{minipage}[ht]{0.5\linewidth}
-	\includegraphics[height=50mm]{plots/g28_plot05.eps}
+	\includegraphics[height=50mm]{plots/g28_project_plot05.eps}
 	\caption{System Resource usage is High }	
 	\end{minipage}	
 	\begin{minipage}[ht]{0.5\linewidth}
-	\includegraphics[height=50mm]{plots1/g28_plot05.eps}
+	\includegraphics[height=50mm]{plots1/g28_project_plot05.eps}
 	\caption{System Resource usage is Low }		
 	\end{minipage}	
 	\end{figure}
@@ -194,11 +194,11 @@ Code analysis using Gprof Matplotlib and GunPlot
 \subsection{Plot06 : Frequency Vs Step-Time}
 \begin{figure}[ht]
 	\begin{minipage}[ht]{0.5\linewidth}
-	\includegraphics[height=50mm]{plots/g28_plot06.eps}
+	\includegraphics[height=50mm]{plots/g28_project_plot06.eps}
 	\caption{System Resource usage is High }	
 	\end{minipage}	
 	\begin{minipage}[ht]{0.5\linewidth}
-	\includegraphics[height=50mm]{plots1/g28_plot06.eps}
+	\includegraphics[height=50mm]{plots1/g28_project_plot06.eps}
 	\caption{System Resource usage is Low }		
 	\end{minipage}	
 	\end{figure}
@@ -256,7 +256,8 @@ We can make  this function inline and reduce the overhead
 \section{Conclusion}
 	We are very thankful to our instructor Prof Parag Chaudhari for giving us a wonderful opportunity to work on such a project and design our own RubeGoldberg machine.
 	We are also very thankful to our TA's for constantly helping us in labs.
-
+\bibliographystyle{acm}
+\bibliography{ref}
 \end{document}
 
 

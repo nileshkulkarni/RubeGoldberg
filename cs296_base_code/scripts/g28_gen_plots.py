@@ -5,7 +5,7 @@ from numpy import genfromtxt
 
 #####################################################################
 
-data=genfromtxt('data/lab05_g28_data.csv',delimiter=',',dtype=None)
+data=genfromtxt('data/project_g28_data.csv',delimiter=',',dtype=None)
 
 #Plot 1
 #AVERAGED OVER RERUN
@@ -36,7 +36,7 @@ for i in range(0,100):
 plt.plot(itrno, stepval, 'r+',label="step time")
 plt.plot(itrno, looptime, 'b*',label="Total Time")
 plt.legend()
-plt.savefig('plots/g28_lab09_plot01.png')
+plt.savefig('plots/g28_project_plot01.png')
 plt.clf()
 
 
@@ -85,7 +85,7 @@ plt.plot(itrno, collision, 'b+',label="Collision")
 plt.plot(itrno,velocity,'g+',label="Velocity")
 plt.plot(itrno,position,'y*',label="Position")
 plt.legend()
-plt.savefig('plots/g28_lab09_plot02.png')
+plt.savefig('plots/g28_project_plot02.png')
 plt.clf()
 
 
@@ -123,7 +123,7 @@ for i in range(0,100):
 plt.plot(rerunno, stepval,'r.', label="step Time")
 plt.plot(rerunno, looptime, 'b*',label="Loop Time")
 plt.legend()
-plt.savefig('plots/g28_lab09_plot03.png')
+plt.savefig('plots/g28_project_plot03.png')
 plt.clf()
 
 
@@ -173,7 +173,7 @@ plt.plot(rerunno, collision, 'b.',label='Collision Time')
 plt.plot(rerunno,velocity,'g.',label='Velocity Time' ),
 plt.plot(rerunno,position,'y.',label='Position Time')
 plt.legend()
-plt.savefig('plots/g28_lab09_plot04.png')
+plt.savefig('plots/g28_project_plot04.png')
 plt.clf()
 
 #####################################################################
@@ -210,7 +210,7 @@ for i in range(0,100):
 		
 #plt.plot(itrno, stepval, 'r--')
 plt.errorbar(itrno, stepval, yerr=devstepval, fmt='r+')
-plt.savefig('plots/g28_lab09_plot05.png')
+plt.savefig('plots/g28_project_plot05.png')
 plt.clf()
 
 ##################################################################
@@ -232,7 +232,7 @@ for i in range(0,100):
 plt.hist(newdata,100,histtype='step',color='b',label='cumulative',cumulative=True)
 plt.hist(newdata,100,color='r',label='Histogram')
 plt.legend()
-plt.savefig('plots/g28_lab09_plot06.png')
+plt.savefig('plots/g28_project_plot06.png')
 plt.clf()
 
 

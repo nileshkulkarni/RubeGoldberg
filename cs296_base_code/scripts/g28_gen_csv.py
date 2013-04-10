@@ -6,7 +6,7 @@ import csv
 iterations = 101
 rerun =101
 
-filename = "data/lab05_g28_data.csv"
+filename = "data/project_g28_data.csv"
 def getData(s):
 	return re.findall("([\d.]+)\s",s)
 

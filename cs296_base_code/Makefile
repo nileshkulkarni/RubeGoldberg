@@ -111,13 +111,21 @@ doc:
 	@$(DOXYGEN) $(DOCDIR)/Doxyfile 2 > /dev/null
 	@$(ECHO) "Done"
 
-
+pythonPlots:
+		@cp src/main_non_gui.cpp.bak src/main.cpp
+		@make
+		@mkdir -p data
+		@mkdir -p plots
+		@python3 scripts/g28_gen_csv.py
+		@python3 scripts/g28_gen_plots.py
+		@python3 scripts/convertImages.py
+		@cp src/main_gui.cpp.bak src/main.cpp
 
 report: all
 	@echo "Generating report"
 	@make -C $(DOCDIR)	
-#	@python3 scripts/g28_gen_html.py
-
+	@python3 scripts/g28_gen_html.py
+	
 #source files Box2d tar, src , documentation,Makefile, scripts
 dist:distclean 
 	@$(RM) -rf external/include external/lib external/src/Box2D	
