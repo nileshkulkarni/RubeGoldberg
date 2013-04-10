@@ -120,7 +120,7 @@ pythonPlots:
 		@python3 scripts/g28_gen_plots.py
 		@python3 scripts/convertImages.py
 		@cp src/main_gui.cpp.bak src/main.cpp
-
+		@make
 report: 
 	@echo "Generating report"
 	@make -C $(DOCDIR)	
@@ -168,6 +168,7 @@ plot01: setup
 	@gnuplot> load 'scripts/g28_plot06.gpt'
 	@rm -rf *.dat data/lab05_g28_data_temp.csv load 
 	@cp src/main_gui.cpp.bak src/main.cpp
+	@make
 plot02: setup
 	@cp src/main_non_gui.cpp.bak src/main.cpp
 	@rm -rf data/temp.csv
@@ -185,3 +186,4 @@ plot02: setup
 	@gnuplot> load 'scripts/g28_plot06.gpt'
 	@rm -rf *.dat data/lab05_g28_data_temp.csv load
 	@cp src/main_gui.cpp.bak src/main.cpp
+	@make
