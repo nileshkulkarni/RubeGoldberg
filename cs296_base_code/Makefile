@@ -121,7 +121,7 @@ pythonPlots:
 		@python3 scripts/convertImages.py
 		@cp src/main_gui.cpp.bak src/main.cpp
 
-report: all
+report: 
 	@echo "Generating report"
 	@make -C $(DOCDIR)	
 	@python3 scripts/g28_gen_html.py
