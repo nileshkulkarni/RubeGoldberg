@@ -291,7 +291,7 @@ class Ball
 		b2EdgeShape edge;
  		/*! We are adding an edge to the world which would be placed on the object which we want to produce sound for. */
 		edge.Set(b2Vec2(startX,startY),b2Vec2(stopX,stopY))  ; 
-     
+    		 
 	  b2FixtureDef ballfd;
       ballfd.shape = &edge;
 
@@ -320,52 +320,33 @@ class Ball
 			this->render();	}
   	void endContact() { m_contact = false;
    			pthread_detach(t1);	}
+	/*! render function is called for creating a thread for a play function 
+	* with a thread id t1.
+	*/
 	void render(){
-		if(1){
-			if(calledOnce && !calledTwice){
-				
-				
-		//	pthread_cancel(t1);
-			}
-
 			if(!calledOnce && !calledTwice){
 				int result = pthread_create(&t1,0,Ball::play,this);	
 				calledOnce=true;
 			}
 			else if(calledOnce){
-			
-			calledTwice=true;
-			
-			
-			std::string msg1 ("hello");
-			
-			//std::thread thr(&Ball::play1, this,10);
-			//std::swap(thr,musicThread);
-			
-			std::cout<<"here\n";
+				calledTwice=true;	
+				std::string msg1 ("hello");
+				std::cout<<"here\n";
 			}
 			calledOnce=true;
-		}
-			/*	int a=1;
-			std::cout<<"Called me\n";	
-			int create1 = pthread_create( &t1, NULL,cs296::Ball::play1,reinterpret_cast<void*>(&msg1));
-		*/
-			//	}
 		return;
 	}
-	void musicThreadjoin(){
-	//	musicThread.join();	
-		//system("pkill mpg123");	
-	}
-
-
 	
 
 };
 
+/*! This is custom class inherited from b2ContactListener this class receives all  contact signals which are then filterd according to our requirement
+ */ 
 class MyContactListener : public b2ContactListener
   {
-    void BeginContact(b2Contact* contact) {
+	/*! This is called when a collision is detected and it gets b2Contact* as an argument which has all the details about the contact. 
+   */
+	   void BeginContact(b2Contact* contact) {
   
       void* bodyUserData = contact->GetFixtureA()->GetBody()->GetUserData();
       if ( bodyUserData ){
@@ -378,22 +359,21 @@ class MyContactListener : public b2ContactListener
     
 	  }
 }
-  
+  	/*! This is called when a collision is ended  and it gets b2Contact* as an argument which has all the details about the contact. 
+   */
+	
     void EndContact(b2Contact* contact) {
   
       //check if fixture A was a ball
       void* bodyUserData = contact->GetFixtureA()->GetBody()->GetUserData();
-	  //std::cout<<"Here inside end\n";
 	  if ( bodyUserData ){
         static_cast<Ball*>( bodyUserData )->endContact();
 		static_cast<Ball*>( bodyUserData )->musicThreadjoin();
- 	//	system("pkill mpg123");
 	  }
       //check if fixture B was a ball
       bodyUserData = contact->GetFixtureB()->GetBody()->GetUserData();
       if ( bodyUserData ){
         static_cast<Ball*>( bodyUserData )->endContact();
- 	//	system("pkill mpg123");
 		static_cast<Ball*>( bodyUserData )->musicThreadjoin();
     }
 	}
