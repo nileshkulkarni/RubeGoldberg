@@ -16,9 +16,10 @@ all:report
 
 report:
 	@$(ECHO) -n "Generating Report ...  "
-	@$(LATEX) report.tex
-	@dvipdf report.dvi
-	@rm report.dvi
+	@$(LATEX) report_project_g28.tex
+	@$(LATEX) report_project_g28.tex
+	@dvipdf report_project_g28.dvi
+	@rm report_project_g28.dvi
 	@$(ECHO) "Done"
 
 

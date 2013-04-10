@@ -172,34 +172,29 @@ namespace cs296
 
 
 
-
-
-
-/*! This is custom class that genrates a custom surface on the objects to which we want to do some particular action on call back.
- * in this case the class is capable of playing a song on being hit by any object. 
- */
+//! This is custom class that genrates a custom surface on the objects to which we want to do some particular action on call back. in this case the class is capable of playing a song on being hit by any object. 
 class Ball
 {
 	private:
-		/*! keeps track of current contact status */	
+		//! keeps track of current contact status 	
 		bool m_contact	; 
-		/*! used to link the body with current world */
+		//! used to link the body with current world 
 		b2World* my_world;
-		/* the thread id of the process which is going to play the song*/
+		//! the thread id of the process which is going to play the song
 
 		pthread_t t1;
-		/* these two are used to keep track of no times it has been called or being collided by the object*/
+		//! these two are used to keep track of no times it has been called or being collided by the object
 		bool calledOnce;
 		bool calledTwice;
 	public:	
-		/*!constructor of the class  it places the object at the position defined startX, Starty and stopx and stopy */
+		//!constructor of the class  it places the object at the position defined startX, Starty and stopx and stopy 
 		Ball(b2World* m_world,float startX,float startY,float stopX,float stopY ){
 		m_contact = false;	
 		calledOnce=false;
 		calledTwice=false;
 		b2Body* spherebody;
 		b2EdgeShape edge;
- 		/*! We are adding an edge to the world which would be placed on the object which we want to produce sound for. */
+ 		//! We are adding an edge to the world which would be placed on the object which we want to produce sound for. 
 		edge.Set(b2Vec2(startX,startY),b2Vec2(stopX,stopY))  ; 
     		 
 	  b2FixtureDef ballfd;
@@ -212,33 +207,36 @@ class Ball
 		
 		
 		}
-/*! This is a static function of the class which takes care of playing the song as a parralel process
- * The song is played using mpg123 a linux function.
- */
+//! This is a static function of the class which takes care of playing the song as a parralel process The song is played using mpg123 a linux function.
 
-	static void* play(void*){
+
+	static void* play(void*)
+	{
 		std::cout<<"threading is working";
-		//usleep(1000000);
-		system("mpg123 src/alarm.mp3");
-		
+		system("mpg123 resources/alarm.mp3");
 		return NULL;
 	}
-	void startContact() { 
+	void startContact() 
+	{ 
 			std::cout<<"Detected\n";
 			m_contact = true;
-   			
-			this->render();	}
-  	void endContact() { m_contact = false;
-   			pthread_detach(t1);	}
-	/*! render function is called for creating a thread for a play function 
-	* with a thread id t1.
-	*/
-	void render(){
-			if(!calledOnce && !calledTwice){
+			this->render();	
+	}
+  	void endContact() 
+	{ 
+		m_contact = false;
+		pthread_detach(t1);	
+	}
+	//! render function is called for creating a thread for a play function with a thread id t1.
+	void render()
+	{
+			if(!calledOnce && !calledTwice)
+			{
 				int result = pthread_create(&t1,0,Ball::play,this);	
 				calledOnce=true;
 			}
-			else if(calledOnce){
+			else if(calledOnce)
+			{
 				calledTwice=true;	
 				std::string msg1 ("hello");
 				std::cout<<"here\n";
@@ -250,12 +248,11 @@ class Ball
 
 };
 
-/*! This is custom class inherited from b2ContactListener this class receives all  contact signals which are then filterd according to our requirement
- */ 
+//! This is custom class inherited from b2ContactListener this class receives all  contact signals which are then filterd according to our requirement
+ 
 class MyContactListener : public b2ContactListener
   {
-	/*! This is called when a collision is detected and it gets b2Contact* as an argument which has all the details about the contact. 
-   */
+	//! This is called when a collision is detected and it gets b2Contact* as an argument which has all the details about the contact. 
 	   void BeginContact(b2Contact* contact) {
   
       void* bodyUserData = contact->GetFixtureA()->GetBody()->GetUserData();
@@ -269,8 +266,8 @@ class MyContactListener : public b2ContactListener
     
 	  }
 }
-  	/*! This is called when a collision is ended  and it gets b2Contact* as an argument which has all the details about the contact. 
-   */
+  	//! This is called when a collision is ended  and it gets b2Contact* as an argument which has all the details about the contact. 
+ 
 	
     void EndContact(b2Contact* contact) {
   

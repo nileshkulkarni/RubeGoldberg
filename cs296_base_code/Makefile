@@ -22,6 +22,7 @@ SRCDIR = $(PROJECT_ROOT)/src
 OBJDIR = $(PROJECT_ROOT)/obj
 BINDIR = $(PROJECT_ROOT)/bin
 DOCDIR = $(PROJECT_ROOT)/doc
+RESOURCESDIR = $(PROJECT_ROOT)/resources
 
 INSTALL_PATH=/home/nilesh/Desktop
 # Library Paths
@@ -59,7 +60,7 @@ INCS := $(wildcard $(SRCDIR)/*.hpp)
 OBJS := $(SRCS:$(SRCDIR)/%.cpp=$(OBJDIR)/%.o)
 
 
-.PHONY: all setup doc clean distclean dist install BOX2DLIB setBox2d
+.PHONY: all setup doc clean distclean dist install 
 
 all: setup $(BINDIR)/$(TARGET)
 
@@ -68,7 +69,7 @@ setup:
 	@mkdir -p obj
 	@mkdir -p bin
 
-$(BINDIR)/$(TARGET): $(OBJS)
+$(BINDIR)/$(TARGET):  $(PROJECT_ROOT)/external/lib/libBox2D.a $(OBJS) 
 	@$(PRINTF) "$(MESG_COLOR)Building executable:$(NO_COLOR) $(FILE_COLOR) %16s$(NO_COLOR)" "$(notdir $@)"
 	@$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $(OBJS) $(LIBS) 2> temp.log || touch temp.err
 	@if test -e temp.err; \
@@ -81,7 +82,17 @@ $(BINDIR)/$(TARGET): $(OBJS)
 
 -include $(OBJS:.o=.d)
 
-BOX2DLIB=$(PROJECT_ROOT)/external/lib/libBox2D.a
+
+$(PROJECT_ROOT)/external/lib/libBox2D.a:
+	@rm -rf $(EXTERNAL_ROOT)/src/Box2D
+	@rm -rf $(EXTERNAL_ROOT)/src/include/*
+	@rm -rf $(EXTERNAL_ROOT)/src/lib/*
+	@tar -xzf $(EXTERNAL_ROOT)/src/Box2D.tgz -C $(EXTERNAL_ROOT)/src
+	@mkdir $(EXTERNAL_ROOT)/src/Box2D/build296
+	@cd $(EXTERNAL_ROOT)/src/Box2D/build296;cmake -DCMAKE_BUILD_TYPE=Debug ../ 
+	@make -C $(EXTERNAL_ROOT)/src/Box2D/build296
+	@make -C $(EXTERNAL_ROOT)/src/Box2D/build296 install
+
 
 $(OBJS): $(OBJDIR)/%.o : $(SRCDIR)/%.cpp
 	@$(PRINTF) "$(MESG_COLOR)Compiling: $(NO_COLOR) $(FILE_COLOR) %25s$(NO_COLOR)" "$(notdir $<)"
@@ -101,15 +112,6 @@ doc:
 	@$(ECHO) "Done"
 
 
-setBox2d:$(BOX2DLIB)
-	@rm -rf $(EXTERNAL_ROOT)/src/Box2D
-	@rm -rf $(EXTERNAL_ROOT)/src/include/*
-	@rm -rf $(EXTERNAL_ROOT)/src/lib/*
-	@tar -xzf $(EXTERNAL_ROOT)/src/Box2D.tgz -C $(EXTERNAL_ROOT)/src
-	@mkdir $(EXTERNAL_ROOT)/src/Box2D/build296
-	@cd $(EXTERNAL_ROOT)/src/Box2D/build296;cmake -DCMAKE_BUILD_TYPE=Debug ../ 
-	@make -C $(EXTERNAL_ROOT)/src/Box2D/build296
-	@make -C $(EXTERNAL_ROOT)/src/Box2D/build296 install
 
 report: all
 	@echo "Generating report"
@@ -121,17 +123,12 @@ dist:distclean
 	@$(RM) -rf external/include external/lib external/src/Box2D	
 	@sh scripts/tarProject.sh
 
-install:distclean
-	@rm -rf $(EXTERNAL_ROOT)/src/Box2D
-	@rm -rf $(EXTERNAL_ROOT)/src/include/*
-	@rm -rf $(EXTERNAL_ROOT)/src/lib/*
-	@tar -xzf $(EXTERNAL_ROOT)/src/Box2D.tgz -C $(EXTERNAL_ROOT)/src
-	@mkdir $(EXTERNAL_ROOT)/src/Box2D/build296
-	@cd $(EXTERNAL_ROOT)/src/Box2D/build296;cmake -DCMAKE_BUILD_TYPE=Debug ../ 
-	@make -C $(EXTERNAL_ROOT)/src/Box2D/build296
-	@make -C $(EXTERNAL_ROOT)/src/Box2D/build296 install
-	@make clean
+install:distclean doc 
 	@make
+	@cp -r $(BINDIR) $(INSTALL_PATH)
+	@cp -r scripts $(INSTALL_PATH)
+	@cp -r $(DOCDIR) $(INSTALL_PATH)
+	@cp -r $(RESOURCESDIR) $(INSTALL_PATH)
 		
 clean:
 	@$(ECHO) -n "Cleaning up..."
@@ -144,9 +141,12 @@ distclean: clean
 	@$(RM) -rf external/include external/lib external/src/Box2D	
 
 
+#first change the main.cpp to the one to be used to generate plots	
 plot01: setup
+	@cp src/main_non_gui.cpp.bak src/main.cpp
 	@rm -rf plots
 	@mkdir plots
+	@make
 	@rm -rf data/temp.csv
 	@chmod 755 scripts/*.sh
 	@./scripts/gen_data.sh
@@ -159,10 +159,14 @@ plot01: setup
 	@gnuplot> load 'scripts/g28_plot05.gpt'
 	@gnuplot> load 'scripts/g28_plot06.gpt'
 	@rm -rf *.dat data/lab05_g28_data_temp.csv load 
-
+	@cp src/main_gui.cpp.bak src/main.cpp
 plot02: setup
+	@cp src/main_non_gui.cpp.bak src/main.cpp
 	@rm -rf data/temp.csv
+	@make
 	@chmod 755 scripts/*.sh
+	@mkdir plots
+	@make
 	@./scripts/gen_data_csv.sh
 	@./scripts/temp.sh
 	@gnuplot> load 'scripts/g28_plot01.gpt'
@@ -172,3 +176,4 @@ plot02: setup
 	@gnuplot> load 'scripts/g28_plot05.gpt'
 	@gnuplot> load 'scripts/g28_plot06.gpt'
 	@rm -rf *.dat data/lab05_g28_data_temp.csv load
+	@cp src/main_gui.cpp.bak src/main.cpp

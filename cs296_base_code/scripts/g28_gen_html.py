@@ -1,11 +1,14 @@
 import string
 
-html = open('doc/g28_lab09_report.html', 'w')
+html = open('doc/g28_project_report.html', 'w')
 html.write('''
 <html>
 <head>
+<title stype="text-align:center;">RubeGolberg Machine </title>
 </head>
-<body>
+
+<body > 
+<h1 style="text-align:center"> RubeGoldberg Machine</h1>
  ''')
 
 tagList=['begin','includegraphics','itemize','item','caption','label','verbatim','end','pagebreak']
@@ -164,16 +167,16 @@ def secPart(data):
 			secTitleStart=data[secStart:].find("{")+secStart
 			secTitleEnd=data[secStart:].find("}")+secStart
 			
-			html.write("<h1>")
+			html.write("<h3>")
 			html.write(data[secTitleStart+1:secTitleEnd])
-			html.write("</h1>")
+			html.write("</h3>")
 
 			processSection(data[secTitleEnd+1:secEnd])
 
 			data=data[secEnd:]
 			secEnd=0
 
-file=open("doc/report_cs296_28.tex",'r')
+file=open("doc/report_project_g28.tex",'r')
 data=file.read()
 secPart(data)
 
